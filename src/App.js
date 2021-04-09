@@ -15,11 +15,11 @@ function App() {
       <nav>
         <NavLink end to="/">
           <button>Home</button>
-        </NavLink>{' '}
+        </NavLink>
         &nbsp;
         <NavLink to="/history">
           <button>History</button>
-        </NavLink>{' '}
+        </NavLink>
         &nbsp;
         <NavLink to="/playlist">
           <button>Playlist</button>
