@@ -1,3 +1,12 @@
+import { data } from './data';
+import { VideoCard } from './VideoCard';
+
 export function VideoListing() {
-  return <h1>videos will come here</h1>;
+  return (
+    <div className="App">
+      {data.map((video) => (
+        <VideoCard video={video} />
+      ))}
+    </div>
+  );
 }

@@ -1,3 +1,17 @@
+import { useData } from './dataContext';
+import { LikedVideosCard } from './LikedVideosCard';
+
 export function Likedvideos() {
-  return <h1>Likedvideos</h1>;
+  const { likedVideos } = useData();
+
+  return (
+    <>
+      <h1>Liked Videos</h1>
+      <div className="App">
+        {likedVideos.map((video) => (
+          <LikedVideosCard video={video} />
+        ))}
+      </div>
+    </>
+  );
 }

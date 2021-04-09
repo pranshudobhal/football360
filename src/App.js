@@ -1,17 +1,15 @@
 import './App.css';
 import { VideoListing } from './VideoListing';
+import { VideoPage } from './VideoPage';
 import { History } from './History';
 import { Playlist } from './Playlist';
 import { Watchlater } from './Watchlater';
 import { Likedvideos } from './Likedvideos';
 import { NoMatch } from './error404';
 
-// import { useState } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
 
 function App() {
-  // const [route, setRoute] = useState('products');
-
   return (
     <>
       <nav>
@@ -37,6 +35,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<VideoListing />} />
+        <Route path="/:videoID" element={<VideoPage />} />
         <Route path="/history" element={<History />} />
         <Route path="/playlist" element={<Playlist />} />
         <Route path="/watchlater" element={<Watchlater />} />
