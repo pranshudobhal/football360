@@ -9,6 +9,18 @@ export function DataProvider({ children }) {
     watchLater: [],
     likedVideos: [],
     history: [],
+    playlist: [
+      {
+        id: 1,
+        name: 'playlist 1',
+        videos: ['KriBQVhsgZk', 'cqylLiMzk54'],
+      },
+      {
+        id: 2,
+        name: 'playlist 2',
+        videos: ['1B_7JxGsK7Y'],
+      },
+    ],
   });
 
   function toggleLikeButtonText(id) {
@@ -35,6 +47,7 @@ export function DataProvider({ children }) {
         watchLater: state.watchLater,
         likedVideos: state.likedVideos,
         history: state.history,
+        playlist: state.playlist,
         toggleLikeButtonText,
         toggleWatchLaterText,
       }}
@@ -58,6 +71,55 @@ const reducer = (state, action) => {
 
     case 'ADD_VIDEO_TO_HISTORY':
       return { ...state, history: state.history.find((video) => video.id === action.payload.id) ? [...state.history.filter((video) => video.id !== action.payload.id), { ...action.payload }] : [...state.history, { ...action.payload }] };
+
+    case 'CREATE_PLAYLIST':
+      return {
+        ...state,
+        playlist: [
+          ...state.playlist,
+          {
+            id: 4,
+            name: action.payload.playlistName,
+            videos: [action.payload.id],
+          },
+        ],
+      };
+
+    case 'ADD_TO_PLAYLIST':
+      return {
+        ...state,
+        playlist: state.playlist.map((playlistItem) => {
+          if (playlistItem.id === action.payload.playlistID) {
+            return { ...playlistItem, videos: playlistItem.videos.find((id) => id === action.payload.videoID) ? [...playlistItem.videos] : [...playlistItem.videos, action.payload.videoID] };
+          } else {
+            return { ...playlistItem };
+          }
+        }),
+      };
+
+    case 'DELETE_PLAYLIST':
+      return {
+        ...state,
+        playlist: state.playlist.filter((playlistItem) => playlistItem.id !== action.payload.id),
+      };
+
+    case 'REMOVE_VIDEO_FROM_PLAYLIST':
+      return {
+        ...state,
+        playlist: state.playlist.map((playlistItem) => {
+          if (playlistItem.id === action.payload.playlistID) {
+            return { ...playlistItem, videos: playlistItem.videos.filter((id) => id !== action.payload.videoID) };
+          } else {
+            return playlistItem;
+          }
+        }),
+      };
+
+    case 'UPDATE_PLAYLIST_NAME':
+      return {
+        ...state,
+        playlist: state.playlist.map((playlistItem) => (playlistItem.id === action.payload.id ? { ...playlistItem, name: action.payload.name } : playlistItem)),
+      };
 
     default:
       throw new Error('error in reducer');

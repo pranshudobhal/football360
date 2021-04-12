@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useData } from './dataContext';
 import { Link } from 'react-router-dom';
 
 export function VideoCard({ video }) {
   const { id, name, url, channel, thumbnail, views, time } = video;
-  const { videoDispatch, toggleWatchLaterText, toggleLikeButtonText } = useData();
+  const { videoDispatch, toggleWatchLaterText, toggleLikeButtonText, playlist } = useData();
+
+  const [playlistName, setplaylistName] = useState('');
 
   return (
     <div
@@ -28,6 +30,20 @@ export function VideoCard({ video }) {
       <div> {time} </div>
       <button onClick={() => videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: video })}>{toggleWatchLaterText(id)}</button>
       <button onClick={() => videoDispatch({ type: 'TOGGLE_LIKED_VIDEO', payload: video })}>{toggleLikeButtonText(id)}</button>
+
+      {playlist.map((playlistItem) => {
+        return <div onClick={() => videoDispatch({ type: 'ADD_TO_PLAYLIST', payload: { playlistID: playlistItem.id, videoID: id } })}>{playlistItem.name}</div>;
+      })}
+
+      <input type="text" value={playlistName} onChange={(e) => setplaylistName(e.target.value)} />
+      <button
+        onClick={() => {
+          videoDispatch({ type: 'CREATE_PLAYLIST', payload: { playlistName, id } });
+          setplaylistName('');
+        }}
+      >
+        Create playlist
+      </button>
     </div>
   );
 }

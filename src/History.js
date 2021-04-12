@@ -6,7 +6,7 @@ export function History() {
 
   return (
     <>
-      <h1>Liked Videos</h1>
+      <h1>Watch History</h1>
       <div className="App">
         {[...history].reverse().map((video) => (
           <HistoryCard video={video} />
