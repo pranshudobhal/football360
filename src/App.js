@@ -1,11 +1,7 @@
 import './App.css';
-import { VideoListing } from './VideoListing';
-import { VideoPage } from './VideoPage';
-import { History } from './History';
-import { Playlist } from './Playlist';
-import { Watchlater } from './Watchlater';
-import { Likedvideos } from './Likedvideos';
-import { NoMatch } from './error404';
+
+import { VideoListing, VideoPage, History, Playlist, WatchLater, LikedVideos, Error404 } from './pages';
+import { HeaderMobile, NavbarMobile } from './components';
 
 import { Routes, Route, NavLink } from 'react-router-dom';
 
@@ -33,14 +29,16 @@ function App() {
           <button>Liked Videos</button>
         </NavLink>
       </nav>
+      <HeaderMobile />
+      <NavbarMobile />
       <Routes>
         <Route path="/" element={<VideoListing />} />
         <Route path="/:videoID" element={<VideoPage />} />
         <Route path="/history" element={<History />} />
         <Route path="/playlist" element={<Playlist />} />
-        <Route path="/watchlater" element={<Watchlater />} />
-        <Route path="/likedvideos" element={<Likedvideos />} />
-        <Route path="*" element={<NoMatch />} />
+        <Route path="/watchlater" element={<WatchLater />} />
+        <Route path="/likedvideos" element={<LikedVideos />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
     </>
   );

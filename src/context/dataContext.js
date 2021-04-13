@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from 'react';
-import { data } from './data';
+import { data } from '../data';
+import { v4 as uuidv4 } from 'uuid';
 
 const DataContext = createContext();
 
@@ -11,12 +12,12 @@ export function DataProvider({ children }) {
     history: [],
     playlist: [
       {
-        id: 1,
+        id: uuidv4(),
         name: 'playlist 1',
         videos: ['KriBQVhsgZk', 'cqylLiMzk54'],
       },
       {
-        id: 2,
+        id: uuidv4(),
         name: 'playlist 2',
         videos: ['1B_7JxGsK7Y'],
       },
@@ -57,9 +58,7 @@ export function DataProvider({ children }) {
   );
 }
 
-export function useData() {
-  return useContext(DataContext);
-}
+export const useData = () => useContext(DataContext);
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -78,7 +77,7 @@ const reducer = (state, action) => {
         playlist: [
           ...state.playlist,
           {
-            id: 4,
+            id: uuidv4(),
             name: action.payload.playlistName,
             videos: [action.payload.id],
           },

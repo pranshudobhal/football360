@@ -1,9 +1,8 @@
-import React from 'react';
-import { useData } from './dataContext';
+import { useData } from '../../../context';
 
-export function WatchLaterCard({ video }) {
+export function LikedVideosCard({ video }) {
   const { id, name, url, channel, thumbnail, views, time } = video;
-  const { videoDispatch, toggleWatchLaterText } = useData();
+  const { videoDispatch, toggleWatchLaterText, toggleLikeButtonText } = useData();
 
   return (
     <div
@@ -24,6 +23,7 @@ export function WatchLaterCard({ video }) {
       <div> {channel} </div>
       <div> {time} </div>
       <button onClick={() => videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: video })}>{toggleWatchLaterText(id)}</button>
+      <button onClick={() => videoDispatch({ type: 'TOGGLE_LIKED_VIDEO', payload: video })}>{toggleLikeButtonText(id)}</button>
     </div>
   );
 }

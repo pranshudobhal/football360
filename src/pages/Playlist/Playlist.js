@@ -1,5 +1,6 @@
-import { useData } from './dataContext';
-import { PlaylistCard } from './PlaylistCard';
+import { useData } from '../../context';
+
+import { PlaylistCard } from './components/PlaylistCard';
 
 export function Playlist() {
   const { playlist } = useData();

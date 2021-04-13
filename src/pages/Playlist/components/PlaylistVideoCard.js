@@ -1,5 +1,4 @@
-import React from 'react';
-import { useData } from './dataContext';
+import { useData } from '../../../context';
 import { Link } from 'react-router-dom';
 
 /*

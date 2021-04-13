@@ -1,5 +1,5 @@
-import { data } from './data';
-import { VideoCard } from './VideoCard';
+import { data } from '../../data';
+import { VideoCard } from './components/VideoCard';
 
 export function VideoListing() {
   return (

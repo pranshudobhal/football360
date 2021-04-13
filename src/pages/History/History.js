@@ -1,5 +1,5 @@
-import { useData } from './dataContext';
-import { HistoryCard } from './HistoryCard';
+import { useData } from '../../context';
+import { HistoryCard } from './components/HistoryCard';
 
 export function History() {
   const { history } = useData();

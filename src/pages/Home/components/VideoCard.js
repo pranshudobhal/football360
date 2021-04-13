@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useData } from './dataContext';
+import { useState } from 'react';
+import { useData } from '../../../context';
 import { Link } from 'react-router-dom';
 
 export function VideoCard({ video }) {
@@ -22,8 +22,8 @@ export function VideoCard({ video }) {
       <Link to={`/${id}`}>
         <a href={url} onClick={() => videoDispatch({ type: 'ADD_VIDEO_TO_HISTORY', payload: video })}>
           <img src={thumbnail} width="100%" height="auto" alt={name} />
+          <h3> {name} </h3>
         </a>
-        <h3> {name} </h3>
       </Link>
       <div> {views} </div>
       <div> {channel} </div>

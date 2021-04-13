@@ -1,7 +1,7 @@
-import { useData } from './dataContext';
-import { WatchLaterCard } from './WatchLaterCard';
+import { useData } from '../../context';
+import { WatchLaterCard } from './components/WatchLaterCard';
 
-export function Watchlater() {
+export function WatchLater() {
   const { watchLater } = useData();
 
   return (

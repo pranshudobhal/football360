@@ -1,7 +1,7 @@
-import { useData } from './dataContext';
-import { LikedVideosCard } from './LikedVideosCard';
+import { useData } from '../../context';
+import { LikedVideosCard } from './components/LikedVideosCard';
 
-export function Likedvideos() {
+export function LikedVideos() {
   const { likedVideos } = useData();
 
   return (
