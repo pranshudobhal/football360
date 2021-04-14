@@ -32,7 +32,8 @@ function App() {
       <HeaderMobile />
       <NavbarMobile />
       <Routes>
-        <Route path="/" element={<VideoListing />} />
+        {/* <Route path="/" element={<VideoListing />} /> */}
+        {/* <Route path="/trending" element={<VideoListing />} /> */}
         <Route path="/:videoID" element={<VideoPage />} />
         <Route path="/history" element={<History />} />
         <Route path="/playlist" element={<Playlist />} />

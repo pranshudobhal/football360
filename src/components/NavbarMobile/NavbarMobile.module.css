@@ -1,0 +1,36 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  height: 10vh;
+  background-color: white;
+  width: 100vw;
+  overflow: hidden;
+  border-top: 1px solid #d7d7d7;
+  box-shadow: rgb(0 0 0 / 24%) 0px 1px 8px;
+}
+
+.list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  padding: 0.5rem 0;
+}
+
+.list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  font-size: 0.85rem;
+}
+
+.navlink {
+  text-decoration: none;
+  color: black;
+}
+
+.active {
+  color: #ff3f6c;
+}
