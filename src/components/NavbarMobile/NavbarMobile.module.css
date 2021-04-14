@@ -1,7 +1,7 @@
 .container {
   position: fixed;
   bottom: 0;
-  height: 10vh;
+  height: 9vh;
   background-color: white;
   width: 100vw;
   overflow: hidden;
@@ -23,7 +23,7 @@
   align-items: center;
   justify-content: center;
   list-style-type: none;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
 }
 
 .navlink {

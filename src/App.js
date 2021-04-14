@@ -8,11 +8,12 @@ import { Routes, Route, NavLink } from 'react-router-dom';
 function App() {
   return (
     <>
+      <HeaderMobile />
       <nav>
-        <NavLink end to="/">
+        {/* <NavLink end to="/">
           <button>Home</button>
         </NavLink>
-        &nbsp;
+        &nbsp; */}
         <NavLink to="/history">
           <button>History</button>
         </NavLink>
@@ -29,7 +30,7 @@ function App() {
           <button>Liked Videos</button>
         </NavLink>
       </nav>
-      <HeaderMobile />
+
       <NavbarMobile />
       <Routes>
         {/* <Route path="/" element={<VideoListing />} /> */}
