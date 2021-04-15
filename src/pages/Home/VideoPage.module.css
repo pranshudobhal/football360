@@ -1,0 +1,65 @@
+.container {
+  width: 100vw;
+  padding: 0;
+}
+
+.videocontainer {
+  height: 40vh;
+}
+
+.videodescription {
+  margin: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.title h2 {
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.title {
+  margin-bottom: 0.5rem;
+}
+
+.views {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgb(17, 17, 17, 0.6);
+  margin-bottom: 1.5rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.channel {
+  margin: 0.75rem;
+  display: flex;
+  align-items: center;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.channelimage img {
+  border-radius: 50%;
+  height: 2.5rem;
+  width: auto;
+}
+
+.channeldescription {
+  margin-left: 0.75rem;
+}
+
+.channelname {
+  font-size: 0.9rem;
+}
+
+.channelsubscribers {
+  font-size: 0.75rem;
+  color: rgb(17, 17, 17, 0.6);
+  font-weight: 500;
+}

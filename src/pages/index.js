@@ -5,3 +5,5 @@ export { LikedVideos } from './LikedVideos/LikedVideos';
 export { Playlist } from './Playlist/Playlist';
 export { WatchLater } from './WatchLater/WatchLater';
 export { Error404 } from './Error/Error404';
+export { Library } from './Library/Library';
+export { Trending } from './Trending/Trending';

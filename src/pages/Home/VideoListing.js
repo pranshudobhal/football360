@@ -1,9 +1,10 @@
 import { data } from '../../data';
 import { VideoCard } from './components/VideoCard';
+import styles from './VideoListing.module.css';
 
 export function VideoListing() {
   return (
-    <div className="App">
+    <div className={styles.container}>
       {data.map((video) => (
         <VideoCard video={video} />
       ))}

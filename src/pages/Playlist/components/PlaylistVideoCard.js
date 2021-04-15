@@ -10,7 +10,7 @@ export function PlaylistVideoCard({ videoID, playlistID }) {
 
   const videoItem = videos.find((video) => video.id === videoID);
 
-  const { id, name, url, channel, thumbnail, views, time } = videoItem;
+  const { id, name, url, channel, videoThumbnail, views, time } = videoItem;
 
   return (
     <div
@@ -25,7 +25,7 @@ export function PlaylistVideoCard({ videoID, playlistID }) {
     >
       <Link to={`/${id}`}>
         <a href={url} onClick={() => videoDispatch({ type: 'ADD_VIDEO_TO_HISTORY', payload: videoItem })}>
-          <img src={thumbnail} width="100%" height="auto" alt={name} />
+          <img src={videoThumbnail} width="100%" height="auto" alt={name} />
         </a>
         <h3> {name} </h3>
       </Link>

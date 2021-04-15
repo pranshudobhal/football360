@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 1.95px 2.6px;
+  padding-bottom: 0.5rem;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  max-height: 235px;
+  object-fit: cover;
+}
+
+.description {
+  padding: 0.5rem;
+}
+
+.channel {
+  color: #6b7280;
+  font-weight: 400;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  font-size: 1.15rem;
+}

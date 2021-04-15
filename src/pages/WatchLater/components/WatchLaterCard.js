@@ -1,7 +1,7 @@
 import { useData } from '../../../context';
 
 export function WatchLaterCard({ video }) {
-  const { id, name, url, channel, thumbnail, views, time } = video;
+  const { id, name, url, channel, videoThumbnail, views, time } = video;
   const { videoDispatch, toggleWatchLaterText } = useData();
 
   return (
@@ -16,7 +16,7 @@ export function WatchLaterCard({ video }) {
       }}
     >
       <a href={url}>
-        <img src={thumbnail} width="100%" height="auto" alt={name} />
+        <img src={videoThumbnail} width="100%" height="auto" alt={name} />
       </a>
       <h3> {name} </h3>
       <div> {views} </div>

@@ -2,7 +2,7 @@ import { useData } from '../../../context';
 import { Link } from 'react-router-dom';
 
 export function HistoryCard({ video }) {
-  const { id, name, url, channel, thumbnail, views, time } = video;
+  const { id, name, url, channel, videoThumbnail, views, time } = video;
   const { videoDispatch, toggleWatchLaterText, toggleLikeButtonText } = useData();
 
   return (
@@ -18,7 +18,7 @@ export function HistoryCard({ video }) {
     >
       <Link to={`/${id}`}>
         <a href={url} onClick={() => videoDispatch({ type: 'ADD_VIDEO_TO_HISTORY', payload: video })}>
-          <img src={thumbnail} width="100%" height="auto" alt={name} />
+          <img src={videoThumbnail} width="100%" height="auto" alt={name} />
         </a>
         <h3> {name} </h3>
       </Link>
