@@ -10,15 +10,15 @@ export function DataProvider({ children }) {
     watchLater: [],
     likedVideos: [],
     history: [],
-    playlist: [
+    playlists: [
       {
         id: uuidv4(),
-        name: 'playlist 1',
+        name: 'Miscellaneous',
         videos: ['KriBQVhsgZk', 'cqylLiMzk54'],
       },
       {
         id: uuidv4(),
-        name: 'playlist 2',
+        name: 'Top 10',
         videos: ['1B_7JxGsK7Y'],
       },
     ],
@@ -34,9 +34,9 @@ export function DataProvider({ children }) {
 
   function toggleWatchLaterText(id) {
     if (state.watchLater.find((video) => video.id === id)) {
-      return 'Remove from watch later';
+      return 'Remove from Watch Later';
     } else {
-      return 'Add to watch later';
+      return 'Add to Watch Later';
     }
   }
 
@@ -48,7 +48,7 @@ export function DataProvider({ children }) {
         watchLater: state.watchLater,
         likedVideos: state.likedVideos,
         history: state.history,
-        playlist: state.playlist,
+        playlists: state.playlists,
         toggleLikeButtonText,
         toggleWatchLaterText,
       }}
@@ -74,8 +74,8 @@ const reducer = (state, action) => {
     case 'CREATE_PLAYLIST':
       return {
         ...state,
-        playlist: [
-          ...state.playlist,
+        playlists: [
+          ...state.playlists,
           {
             id: uuidv4(),
             name: action.payload.playlistName,
@@ -84,40 +84,52 @@ const reducer = (state, action) => {
         ],
       };
 
-    case 'ADD_TO_PLAYLIST':
+    // case 'ADD_TO_PLAYLIST':
+    //   return {
+    //     ...state,
+    //     playlists: state.playlists.map((playlistItem) => {
+    //       if (playlistItem.id === action.payload.playlistID) {
+    //         return { ...playlistItem, videos: playlistItem.videos.find((id) => id === action.payload.videoID) ? [...playlistItem.videos] : [...playlistItem.videos, action.payload.videoID] };
+    //       } else {
+    //         return { ...playlistItem };
+    //       }
+    //     }),
+    //   };
+
+    case 'TOGGLE_VIDEO_IN_PLAYLIST':
       return {
         ...state,
-        playlist: state.playlist.map((playlistItem) => {
+        playlists: state.playlists.map((playlistItem) => {
           if (playlistItem.id === action.payload.playlistID) {
-            return { ...playlistItem, videos: playlistItem.videos.find((id) => id === action.payload.videoID) ? [...playlistItem.videos] : [...playlistItem.videos, action.payload.videoID] };
+            return { ...playlistItem, videos: playlistItem.videos.find((id) => id === action.payload.videoID) ? playlistItem.videos.filter((id) => id !== action.payload.videoID) : [...playlistItem.videos, action.payload.videoID] };
           } else {
             return { ...playlistItem };
           }
         }),
       };
 
+    // case 'REMOVE_VIDEO_FROM_PLAYLIST':
+    //   return {
+    //     ...state,
+    //     playlists: state.playlists.map((playlistItem) => {
+    //       if (playlistItem.id === action.payload.playlistID) {
+    //         return { ...playlistItem, videos: playlistItem.videos.filter((id) => id !== action.payload.videoID) };
+    //       } else {
+    //         return playlistItem;
+    //       }
+    //     }),
+    //   };
+
     case 'DELETE_PLAYLIST':
       return {
         ...state,
-        playlist: state.playlist.filter((playlistItem) => playlistItem.id !== action.payload.id),
-      };
-
-    case 'REMOVE_VIDEO_FROM_PLAYLIST':
-      return {
-        ...state,
-        playlist: state.playlist.map((playlistItem) => {
-          if (playlistItem.id === action.payload.playlistID) {
-            return { ...playlistItem, videos: playlistItem.videos.filter((id) => id !== action.payload.videoID) };
-          } else {
-            return playlistItem;
-          }
-        }),
+        playlists: state.playlists.filter((playlistItem) => playlistItem.id !== action.payload.id),
       };
 
     case 'UPDATE_PLAYLIST_NAME':
       return {
         ...state,
-        playlist: state.playlist.map((playlistItem) => (playlistItem.id === action.payload.id ? { ...playlistItem, name: action.payload.name } : playlistItem)),
+        playlists: state.playlists.map((playlistItem) => (playlistItem.id === action.payload.id ? { ...playlistItem, name: action.payload.name } : playlistItem)),
       };
 
     default:

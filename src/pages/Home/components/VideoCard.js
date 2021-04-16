@@ -3,16 +3,16 @@
  * Video controls for save to playlist
  */
 
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useData } from '../../../context';
 import { Link } from 'react-router-dom';
 import styles from './VideoCard.module.css';
 
 export function VideoCard({ video }) {
-  const { id, name, url, channel, videoThumbnail, views, time } = video;
-  const { videoDispatch, toggleWatchLaterText, toggleLikeButtonText, playlist } = useData();
+  const { id, name, channel, videoThumbnail, views } = video;
+  const { videoDispatch } = useData();
 
-  const [playlistName, setplaylistName] = useState('');
+  // const [playlistName, setplaylistName] = useState('');
 
   return (
     <div key={id} className={styles.container}>
