@@ -30,11 +30,11 @@ export function PlaylistCard({ playlistItem }) {
       <input type="text" value={playlistName} readOnly={!isEditable} ref={playlistInput} onChange={(e) => setPlaylistName(() => e.target.value)} />
       <button onClick={() => editPlaylistName()}>{!isEditable ? 'Edit' : 'Save'}</button>
       <button onClick={() => videoDispatch({ type: 'DELETE_PLAYLIST', payload: playlistItem })}>Delete Playlist</button>
-      <p>
+      <div>
         {videos.map((videoID) => (
           <PlaylistVideoCard videoID={videoID} playlistID={id} />
         ))}
-      </p>
+      </div>
     </div>
   );
 }

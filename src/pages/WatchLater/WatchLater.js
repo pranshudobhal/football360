@@ -1,17 +1,20 @@
 import { useData } from '../../context';
 import { WatchLaterCard } from './components/WatchLaterCard';
+import styles from './WatchLater.module.css';
 
 export function WatchLater() {
   const { watchLater } = useData();
 
   return (
-    <>
-      <h1>Watch Later</h1>
-      <div className="App">
+    <div className={styles.watchLaterContainer}>
+      <div className={styles.heading}>
+        <h1>Watch Later</h1>
+      </div>
+      <div className={styles.container}>
         {watchLater.map((video) => (
           <WatchLaterCard video={video} />
         ))}
       </div>
-    </>
+    </div>
   );
 }

@@ -1,17 +1,20 @@
 import { useData } from '../../context';
 import { LikedVideosCard } from './components/LikedVideosCard';
+import styles from './LikedVideos.module.css';
 
 export function LikedVideos() {
   const { likedVideos } = useData();
 
   return (
-    <>
-      <h1>Liked Videos</h1>
-      <div className="App">
+    <div className={styles.likedVideosContainer}>
+      <div className={styles.heading}>
+        <h1>Liked Videos</h1>
+      </div>
+      <div className={styles.container}>
         {likedVideos.map((video) => (
           <LikedVideosCard video={video} />
         ))}
       </div>
-    </>
+    </div>
   );
 }

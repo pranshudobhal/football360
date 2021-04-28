@@ -6,11 +6,11 @@ import { Link } from 'react-router-dom';
  */
 
 export function PlaylistVideoCard({ videoID, playlistID }) {
-  const { videos, videoDispatch, toggleWatchLaterText, toggleLikeButtonText } = useData();
-
+  const { videos, videoDispatch, likedVideos, watchLater } = useData();
   const videoItem = videos.find((video) => video.id === videoID);
-
   const { id, name, url, channel, videoThumbnail, views, time } = videoItem;
+  const isInLikedVideos = likedVideos.find((video) => video.id === id);
+  const isInWatchLater = watchLater.find((video) => video.id === id);
 
   return (
     <div
@@ -29,12 +29,11 @@ export function PlaylistVideoCard({ videoID, playlistID }) {
         </a>
         <h3> {name} </h3>
       </Link>
-      <div> {views} </div>
-      <div> {channel} </div>
-      <div> {time} </div>
-      <button onClick={() => videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: videoItem })}>{toggleWatchLaterText(id)}</button>
-      <button onClick={() => videoDispatch({ type: 'TOGGLE_LIKED_VIDEO', payload: videoItem })}>{toggleLikeButtonText(id)}</button>
-
+      <p> {views} </p>
+      <p> {channel} </p>
+      <p> {time} </p>
+      <button onClick={() => videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: videoItem })}>{isInWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}</button>
+      <button onClick={() => videoDispatch({ type: 'TOGGLE_LIKED_VIDEO', payload: videoItem })}>{isInLikedVideos ? 'Remove from Liked Videos' : 'Add to Liked Videos'}</button>
       <button onClick={() => videoDispatch({ type: 'REMOVE_VIDEO_FROM_PLAYLIST', payload: { videoID, playlistID } })}>Remove video from playlist</button>
     </div>
   );

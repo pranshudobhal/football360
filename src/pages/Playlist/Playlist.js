@@ -1,5 +1,4 @@
 import { useData } from '../../context';
-
 import { PlaylistCard } from './components/PlaylistCard';
 
 export function Playlist() {

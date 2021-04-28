@@ -11,17 +11,12 @@ import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 
 export function VideoPage() {
   const { videoID } = useParams();
-
   const [playlistModal, showPlaylistModal] = useState(false);
   const [playlistName, setplaylistName] = useState('');
-
-  const { videos, videoDispatch, likedVideos, watchLater, playlists, toggleWatchLaterText, toggleLikeButtonText } = useData();
-
-  const isLiked = likedVideos.find((video) => video.id === videoID);
-
-  const inWatchLater = watchLater.find((video) => video.id === videoID);
-
-  const inPlaylist = (playlistID) => {
+  const { videos, videoDispatch, likedVideos, watchLater, playlists } = useData();
+  const isInLikedVideos = likedVideos.find((video) => video.id === videoID);
+  const isInWatchLater = watchLater.find((video) => video.id === videoID);
+  const isInPlaylist = (playlistID) => {
     const playlist = playlists.find((playlistItem) => playlistItem.id === playlistID);
     return playlist.videos.find((video) => video === videoID);
   };
@@ -46,12 +41,12 @@ export function VideoPage() {
             </div>
             <div className={styles.actions}>
               <div className={styles.tooltip} onClick={() => videoDispatch({ type: 'TOGGLE_LIKED_VIDEO', payload: video })}>
-                <span className={styles.tooltiptext}>{toggleLikeButtonText(id)}</span>
-                {!isLiked ? <FavoriteBorderIcon /> : <FavoriteIcon color="secondary" />}
+                <span className={styles.tooltiptext}>{isInLikedVideos ? 'Remove from Liked Videos' : 'Add to Liked Videos'}</span>
+                {!isInLikedVideos ? <FavoriteBorderIcon /> : <FavoriteIcon color="secondary" />}
               </div>
               <div className={styles.tooltip} onClick={() => videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: video })}>
-                <span className={styles.tooltiptext}>{toggleWatchLaterText(id)}</span>
-                {!inWatchLater ? <WatchLaterOutlinedIcon /> : <WatchLaterIcon color="secondary" />}
+                <span className={styles.tooltiptext}>{isInWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}</span>
+                {!isInWatchLater ? <WatchLaterOutlinedIcon /> : <WatchLaterIcon color="secondary" />}
               </div>
               <div className={`${styles.playlist} ${styles.tooltip}`}>
                 <span className={styles.tooltiptext}>Add to Playlist</span>
@@ -63,7 +58,7 @@ export function VideoPage() {
                     <ul>
                       {playlists.map((playlistItem) => (
                         <li key={playlistItem.id}>
-                          <input id={playlistItem.id} checked={inPlaylist(playlistItem.id)} type="checkbox" onChange={() => videoDispatch({ type: 'TOGGLE_VIDEO_IN_PLAYLIST', payload: { playlistID: playlistItem.id, videoID: id } })} />
+                          <input id={playlistItem.id} checked={isInPlaylist(playlistItem.id)} type="checkbox" onChange={() => videoDispatch({ type: 'TOGGLE_VIDEO_IN_PLAYLIST', payload: { playlistID: playlistItem.id, videoID: id } })} />
                           <label htmlFor={playlistItem.id}>{playlistItem.name}</label>
                         </li>
                       ))}

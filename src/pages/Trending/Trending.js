@@ -1,6 +1,6 @@
 import { data } from '../../data';
 import { VideoCard } from '../Home/components/VideoCard';
-import styles from '../Home/VideoListing.module.css';
+import styles from './Trending.module.css';
 
 export function Trending() {
   return (
