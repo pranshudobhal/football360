@@ -20,9 +20,7 @@ export function VideoPage() {
     const playlist = playlists.find((playlistItem) => playlistItem.id === playlistID);
     return playlist.videos.find((video) => video === videoID);
   };
-
   const video = videos.find((video) => video.id === videoID);
-
   const { id, name, views, channelThumbnail, channel, subscribers } = video;
 
   return (

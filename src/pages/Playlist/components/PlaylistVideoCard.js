@@ -34,7 +34,7 @@ export function PlaylistVideoCard({ videoID, playlistID }) {
       <p> {time} </p>
       <button onClick={() => videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: videoItem })}>{isInWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}</button>
       <button onClick={() => videoDispatch({ type: 'TOGGLE_LIKED_VIDEO', payload: videoItem })}>{isInLikedVideos ? 'Remove from Liked Videos' : 'Add to Liked Videos'}</button>
-      <button onClick={() => videoDispatch({ type: 'REMOVE_VIDEO_FROM_PLAYLIST', payload: { videoID, playlistID } })}>Remove video from playlist</button>
+      <button onClick={() => videoDispatch({ type: 'TOGGLE_VIDEO_IN_PLAYLIST', payload: { videoID, playlistID } })}>Remove video from playlist</button>
     </div>
   );
 }
