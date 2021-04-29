@@ -3,19 +3,14 @@
   color: var(--primary-color);
 }
 
-.playlistVideoCardContainer {
+.playlistPageVideoCardContainer {
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  max-width: 250px;
-  width: 200px;
+  height: 100px;
   justify-content: space-between;
-  margin-right: 1rem;
-  padding-bottom: 1rem;
 }
 
 .imageContainer {
-  width: 100%;
+  width: 45%;
   height: 100%;
 }
 
@@ -24,12 +19,8 @@
   height: 100%;
 }
 
-.container {
-  display: flex;
-}
-
 .descriptionContainer {
-  width: 90%;
+  width: 45%;
 }
 
 .descriptionContainer h3 {
@@ -50,7 +41,7 @@
 }
 
 .action {
-  width: 10%;
+  width: 5%;
   display: flex;
   justify-content: center;
 }

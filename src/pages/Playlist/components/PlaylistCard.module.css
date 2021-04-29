@@ -1,9 +1,8 @@
 .playlistCardContainer {
-  border: 1px solid black;
-  height: 300px;
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .playlistName {
@@ -12,15 +11,15 @@
 }
 
 .container {
-  border: 1px solid black;
   height: 100%;
   margin: 1rem 0 0;
 }
 
 .videoContainer {
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow-x: scroll;
+  height: 100%;
+  width: 100%;
 }
 
 .emptyContainer {

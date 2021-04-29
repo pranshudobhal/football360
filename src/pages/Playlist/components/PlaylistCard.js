@@ -1,10 +1,6 @@
 import { PlaylistVideoCard } from './PlaylistVideoCard';
 import { useData } from '../../../context';
-import { useRef, useState } from 'react';
 import styles from './PlaylistCard.module.css';
-import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
-import DoneIcon from '@material-ui/icons/Done';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { useNavigate } from 'react-router';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
@@ -15,28 +11,12 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 export function PlaylistCard({ playlistItem }) {
   const { id, name, videos } = playlistItem;
   const { videoDispatch } = useData();
-  const [playlistName, setPlaylistName] = useState(name);
-  const [isEditable, setIsEditable] = useState(false);
-  const playlistInput = useRef(null);
   const navigate = useNavigate();
-  console.log(id);
-
-  function editPlaylistName() {
-    if (!isEditable) {
-      playlistInput.current.focus();
-    } else {
-      videoDispatch({
-        type: 'UPDATE_PLAYLIST_NAME',
-        payload: { id, name: playlistName },
-      });
-    }
-    setIsEditable((isEditable) => !isEditable);
-  }
 
   return (
     <div className={styles.playlistCardContainer}>
       <div className={styles.playlistName}>
-        <h3>{playlistName}</h3>
+        <h3>{name}</h3>
         <span onClick={() => navigate(`/playlist/${id}`)}>
           <OpenInNewIcon />
         </span>
