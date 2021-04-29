@@ -68,6 +68,7 @@
   transform: translate(-50%, -50%);
   background-color: var(--white);
   width: max-content;
+  z-index: 2;
 }
 
 .moreContainer ul {
@@ -89,4 +90,5 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.7);
   overflow: hidden;
+  z-index: 1;
 }

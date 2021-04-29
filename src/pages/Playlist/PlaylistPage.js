@@ -12,46 +12,46 @@ export function PlaylistPage() {
   const { playlistID } = useParams();
   const { playlists, videoDispatch } = useData();
   const playlist = playlists.find((playlistItem) => playlistItem.id === playlistID);
-  const { id, name, videos } = playlist;
   const [isEditable, setIsEditable] = useState(false);
-  const [playlistName, setPlaylistName] = useState(name);
+  const [playlistName, setPlaylistName] = useState('');
   const playlistInput = useRef(null);
 
-  function editPlaylistName() {
-    if (!isEditable) {
-      playlistInput.current.focus();
-    } else {
-      videoDispatch({
-        type: 'UPDATE_PLAYLIST_NAME',
-        payload: { id, name: playlistName },
-      });
+  if (playlist) {
+    const { id, name, videos } = playlist;
+    setPlaylistName(name);
+
+    function editPlaylistName() {
+      if (!isEditable) {
+        playlistInput.current.focus();
+      } else {
+        videoDispatch({
+          type: 'UPDATE_PLAYLIST_NAME',
+          payload: { id, name: playlistName },
+        });
+      }
+      setIsEditable((isEditable) => !isEditable);
     }
-    setIsEditable((isEditable) => !isEditable);
-  }
 
-  return (
-    <>
-      {playlist ? (
-        <div className={styles.playlistPageContainer}>
-          <div className={styles.playlistName}>
-            <input type="text" value={playlistName} readOnly={!isEditable} ref={playlistInput} onChange={(e) => setPlaylistName(() => e.target.value)} />
-            <div className={styles.actions}>
-              <span onClick={() => editPlaylistName()}>{!isEditable ? <EditOutlinedIcon style={{ fontSize: 25 }} /> : <DoneIcon style={{ fontSize: 25 }} />}</span>
-              <span onClick={() => videoDispatch({ type: 'DELETE_PLAYLIST', payload: playlist })}>
-                <DeleteOutlineIcon style={{ fontSize: 25 }} />
-              </span>
-            </div>
-          </div>
-
-          <div className={styles.container}>
-            {videos.map((videoID) => (
-              <PlaylistPageVideoCard videoID={videoID} />
-            ))}
+    return (
+      <div className={styles.playlistPageContainer}>
+        <div className={styles.playlistName}>
+          <input type="text" value={playlistName} readOnly={!isEditable} ref={playlistInput} onChange={(e) => setPlaylistName(() => e.target.value)} />
+          <div className={styles.actions}>
+            <span onClick={() => editPlaylistName()}>{!isEditable ? <EditOutlinedIcon style={{ fontSize: 25 }} /> : <DoneIcon style={{ fontSize: 25 }} />}</span>
+            <span onClick={() => videoDispatch({ type: 'DELETE_PLAYLIST', payload: playlist })}>
+              <DeleteOutlineIcon style={{ fontSize: 25 }} />
+            </span>
           </div>
         </div>
-      ) : (
-        <Error404 />
-      )}
-    </>
-  );
+
+        <div className={styles.container}>
+          {videos.map((videoID) => (
+            <PlaylistPageVideoCard videoID={videoID} />
+          ))}
+        </div>
+      </div>
+    );
+  } else {
+    return <Error404 />;
+  }
 }

@@ -1,5 +1,4 @@
 import './App.css';
-
 import { VideoListing, VideoPage, Trending, History, PlaylistListing, PlaylistPage, WatchLater, LikedVideos, Library, Error404 } from './pages';
 import { HeaderMobile, NavbarMobile } from './components';
 
