@@ -1,7 +1,6 @@
 import { useData } from '../../context';
 import { PlaylistCard } from './components/PlaylistCard';
 import styles from './PlaylistListing.module.css';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 export function PlaylistListing() {
   const { playlists } = useData();

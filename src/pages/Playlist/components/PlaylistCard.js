@@ -1,16 +1,14 @@
+/**
+ * PlaylistCard is used to render different playlists
+ */
+
 import { PlaylistVideoCard } from './PlaylistVideoCard';
-import { useData } from '../../../context';
 import styles from './PlaylistCard.module.css';
 import { useNavigate } from 'react-router';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
-/*
- *   PlaylistCard is used to render different playlists
- */
-
 export function PlaylistCard({ playlistItem }) {
   const { id, name, videos } = playlistItem;
-  const { videoDispatch } = useData();
   const navigate = useNavigate();
 
   return (
