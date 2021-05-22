@@ -5,7 +5,7 @@
   background-color: white;
   width: 100vw;
   overflow: hidden;
-  border-top: 1px solid #d7d7d7;
+  border-top: 1px solid var(--border-color);
   box-shadow: rgb(0 0 0 / 24%) 0px 1px 8px;
 }
 
@@ -32,5 +32,11 @@
 }
 
 .active {
-  color: #ff3f6c;
+  color: var(--secondary-color);
+}
+
+@media screen and (min-width: 1025px) {
+  .container {
+    display: none;
+  }
 }

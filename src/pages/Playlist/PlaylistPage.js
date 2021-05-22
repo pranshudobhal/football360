@@ -11,14 +11,13 @@ import { PlaylistPageVideoCard } from './components/PlaylistPageVideoCard';
 export function PlaylistPage() {
   const { playlistID } = useParams();
   const { playlists, videoDispatch } = useData();
-  const playlist = playlists.find((playlistItem) => playlistItem.id === playlistID);
+  const playlist = playlists?.find((playlistItem) => playlistItem.id === playlistID);
   const [isEditable, setIsEditable] = useState(false);
-  const [playlistName, setPlaylistName] = useState('');
+  const [playlistName, setPlaylistName] = useState(playlist?.name);
   const playlistInput = useRef(null);
 
   if (playlist) {
-    const { id, name, videos } = playlist;
-    setPlaylistName(name);
+    const { id, videos } = playlist;
 
     function editPlaylistName() {
       if (!isEditable) {
@@ -46,7 +45,7 @@ export function PlaylistPage() {
 
         <div className={styles.container}>
           {videos.map((videoID) => (
-            <PlaylistPageVideoCard videoID={videoID} />
+            <PlaylistPageVideoCard key={videoID} videoID={videoID} />
           ))}
         </div>
       </div>

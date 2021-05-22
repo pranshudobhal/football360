@@ -25,3 +25,17 @@
   grid-template-columns: 1fr;
   row-gap: 1rem;
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 2rem;
+  margin-bottom: 6rem;
+}
+
+@media screen and (min-width: 1025px) {
+  .historyContainer {
+    width: 40vw;
+    margin: 2rem auto;
+  }
+}

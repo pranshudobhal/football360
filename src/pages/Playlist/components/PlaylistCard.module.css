@@ -10,6 +10,10 @@
   justify-content: space-between;
 }
 
+.playlistName span {
+  cursor: pointer;
+}
+
 .container {
   height: 100%;
   margin: 1rem 0 0;

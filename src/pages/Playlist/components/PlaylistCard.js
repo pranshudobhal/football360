@@ -9,6 +9,9 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 export function PlaylistCard({ playlistItem }) {
   const { id, name, videos } = playlistItem;
+
+  console.log(playlistItem);
+
   const navigate = useNavigate();
 
   return (
@@ -24,8 +27,8 @@ export function PlaylistCard({ playlistItem }) {
           <div className={styles.emptyContainer}>No vidoes in this playlist</div>
         ) : (
           <div className={styles.videoContainer}>
-            {videos.map((videoID) => (
-              <PlaylistVideoCard videoID={videoID} playlistID={id} />
+            {videos.map((videoID, index) => (
+              <PlaylistVideoCard key={index} videoID={videoID} playlistID={id} />
             ))}
           </div>
         )}

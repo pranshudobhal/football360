@@ -6,7 +6,7 @@
 .heading {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.25rem;
+  margin: 0 0 1.25rem 1rem;
 }
 
 .heading h1 {
@@ -18,4 +18,11 @@
   background-color: var(--white);
   font-size: 0.9rem;
   letter-spacing: 0.5px;
+}
+
+@media screen and (min-width: 1025px) {
+  .playlistListingContainer {
+    width: 60vw;
+    margin: 2rem auto;
+  }
 }

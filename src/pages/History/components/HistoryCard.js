@@ -1,5 +1,4 @@
 import { useData } from '../../../context';
-import { Link } from 'react-router-dom';
 import styles from './HistoryCard.module.css';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useState } from 'react';

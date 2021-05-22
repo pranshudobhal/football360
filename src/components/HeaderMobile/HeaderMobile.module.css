@@ -3,7 +3,7 @@
   height: 7vh;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #d7d7d7;
+  border-bottom: 1px solid var(--border-color);
   box-shadow: rgb(0 0 0 / 24%) 0px 1px 8px;
   padding: 0 1rem;
   margin-bottom: 1rem;
@@ -20,4 +20,10 @@
 .navlink {
   text-decoration: none;
   color: black;
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    height: 8vh;
+  }
 }

@@ -25,3 +25,10 @@
   grid-template-columns: 1fr;
   row-gap: 1rem;
 }
+
+@media screen and (min-width: 1025px) {
+  .watchLaterContainer {
+    width: 40vw;
+    margin: 2rem auto;
+  }
+}

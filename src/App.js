@@ -1,5 +1,5 @@
 import { VideoListing, VideoPage, Trending, History, PlaylistListing, PlaylistPage, WatchLater, LikedVideos, Library, Error404 } from './pages';
-import { HeaderMobile, NavbarMobile } from './components';
+import { HeaderMobile, Navbar } from './components';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <HeaderMobile />
-      <NavbarMobile />
+      <Navbar />
       <Routes>
         <Route path="/" element={<VideoListing />} />
         <Route path="/trending" element={<Trending />} />
