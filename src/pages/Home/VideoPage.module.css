@@ -1,6 +1,7 @@
 .container {
   width: 100vw;
   padding: 0;
+  margin: 0 auto;
 }
 
 .videocontainer {
@@ -180,4 +181,27 @@
   border-width: 5px;
   border-style: solid;
   border-color: black transparent transparent transparent;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    width: 90vw;
+    margin-bottom: 12rem;
+  }
+
+  .videocontainer {
+    height: 70vh;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .container {
+    width: 70vw;
+    margin-bottom: 12rem;
+    padding-left: 1rem;
+  }
+
+  .videocontainer {
+    height: 70vh;
+  }
 }

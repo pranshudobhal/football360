@@ -1,13 +1,3 @@
-/*
- * --------------TODO--------------
- * Header mobile goes at top including notifications and user profile
- */
-
-/*
- * --------------DONE--------------
- * Logo and search
- */
-
 import styles from './HeaderMobile.module.css';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import { NavLink } from 'react-router-dom';

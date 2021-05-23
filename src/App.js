@@ -1,12 +1,11 @@
 import { VideoListing, VideoPage, Trending, History, PlaylistListing, PlaylistPage, WatchLater, LikedVideos, Library, Error404 } from './pages';
-import { HeaderMobile, Navbar } from './components';
-
+import { Header, Navbar } from './components';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <>
-      <HeaderMobile />
+      <Header />
       <Navbar />
       <Routes>
         <Route path="/" element={<VideoListing />} />

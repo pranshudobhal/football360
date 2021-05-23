@@ -6,7 +6,7 @@ export function VideoListing() {
   return (
     <div className={styles.container}>
       {data.map((video) => (
-        <VideoCard video={video} />
+        <VideoCard key={video.id} video={video} />
       ))}
     </div>
   );

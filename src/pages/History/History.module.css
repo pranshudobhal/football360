@@ -18,6 +18,12 @@
   background-color: var(--white);
   font-size: 0.9rem;
   letter-spacing: 0.5px;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+}
+
+.heading button:hover {
+  background-color: rgba(0, 0, 0, 0.04);
 }
 
 .container {

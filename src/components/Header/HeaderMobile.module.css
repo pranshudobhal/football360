@@ -1,6 +1,9 @@
 .container {
   display: flex;
   height: 7vh;
+  position: sticky;
+  top: 0;
+  background-color: var(--white);
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-color);
@@ -15,6 +18,12 @@
 
 .actions {
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions input[type='search'] {
+  display: none;
 }
 
 .navlink {
@@ -22,8 +31,8 @@
   color: black;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
   .container {
-    height: 8vh;
+    display: none;
   }
 }

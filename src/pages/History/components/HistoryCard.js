@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export function HistoryCard({ video }) {
-  const { id, name, url, channel, videoThumbnail, views } = video;
+  const { id, name, channel, videoThumbnail, views } = video;
   const { videoDispatch, watchLater } = useData();
   const [moreModal, showMoreModal] = useState(false);
   const isInWatchLater = watchLater.find((video) => video.id === id);
@@ -15,13 +15,17 @@ export function HistoryCard({ video }) {
   return (
     <div>
       <div key={id} className={styles.historyCardContainer}>
-        <div className={styles.imageContainer} onClick={() => navigate(`/${id}`)}>
-          <a href={url} className={styles.imageAnchor} onClick={() => videoDispatch({ type: 'ADD_VIDEO_TO_HISTORY', payload: video })}>
-            <img src={videoThumbnail} alt={name} className={styles.image} />
-          </a>
+        <div
+          className={styles.imageContainer}
+          onClick={() => {
+            navigate(`/${id}`);
+            videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video });
+          }}
+        >
+          <img src={videoThumbnail} alt={name} className={styles.image} />
         </div>
-        <div className={styles.descriptionContainer} onClick={() => navigate(`/${id}`)}>
-          <h3> {name} </h3>
+        <div className={styles.descriptionContainer}>
+          <h3 onClick={() => navigate(`/${id}`)}> {name} </h3>
           <p className={styles.channelName}> {channel} </p>
           <p className={styles.views}> {views} views </p>
         </div>

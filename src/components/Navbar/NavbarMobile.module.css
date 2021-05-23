@@ -5,6 +5,7 @@
   background-color: white;
   width: 100vw;
   overflow: hidden;
+  z-index: 998;
   border-top: 1px solid var(--border-color);
   box-shadow: rgb(0 0 0 / 24%) 0px 1px 8px;
 }

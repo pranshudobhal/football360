@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   background-color: var(--white);
   box-shadow: rgba(0, 0, 0, 0.15) 0 1.95px 2.6px;
   padding-bottom: 0.5rem;
@@ -37,4 +37,15 @@
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   font-size: 1.15rem;
+}
+
+@media screen and (min-width: 768px) {
+  .title {
+    -webkit-line-clamp: 2;
+    font-size: 1rem;
+  }
+
+  .channel {
+    font-size: 0.75rem;
+  }
 }

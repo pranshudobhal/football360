@@ -6,12 +6,13 @@
 .playlistPageVideoCardContainer {
   display: flex;
   height: 100px;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .imageContainer {
   width: 45%;
   height: 100%;
+  cursor: pointer;
 }
 
 .image {
@@ -20,6 +21,7 @@
 }
 
 .descriptionContainer {
+  margin-left: 1rem;
   width: 45%;
 }
 
@@ -27,6 +29,7 @@
   font-size: 0.85rem;
   font-weight: 500;
   padding: 0.25rem 0 0.35rem;
+  cursor: pointer;
 }
 
 .descriptionContainer .channelName {
@@ -50,6 +53,7 @@
   display: inline-block;
   height: max-content;
   padding: 0.75rem 0;
+  cursor: pointer;
 }
 
 .moreContainer {
@@ -70,6 +74,7 @@
   padding: 1rem 0;
   font-size: 1rem;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .modalCloseContainer {
@@ -80,4 +85,30 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.7);
   overflow: hidden;
+  z-index: 999;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .playlistPageVideoCardContainer {
+    height: 125px;
+  }
+
+  .imageContainer {
+    width: 35%;
+  }
+
+  .descriptionContainer {
+    width: 55%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .playlistPageVideoCardContainer {
+    height: 125px;
+  }
+
+  .imageContainer {
+    width: 200px;
+    max-width: 250px;
+  }
 }

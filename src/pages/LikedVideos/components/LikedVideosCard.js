@@ -5,7 +5,7 @@ import styles from './LikedVideosCard.module.css';
 import { useState } from 'react';
 
 export function LikedVideosCard({ video }) {
-  const { id, name, url, channel, videoThumbnail, views } = video;
+  const { id, name, channel, videoThumbnail, views } = video;
   const { videoDispatch, likedVideos, watchLater } = useData();
   const [moreModal, showMoreModal] = useState(false);
   const navigate = useNavigate();
@@ -16,13 +16,24 @@ export function LikedVideosCard({ video }) {
   return (
     <div>
       <div key={id} className={styles.likedVideosCardContainer}>
-        <div className={styles.imageContainer} onClick={() => navigate(`/${id}`)}>
-          <a href={url} className={styles.imageAnchor} onClick={() => videoDispatch({ type: 'ADD_VIDEO_TO_HISTORY', payload: video })}>
-            <img src={videoThumbnail} alt={name} className={styles.image} />
-          </a>
+        <div
+          className={styles.imageContainer}
+          onClick={() => {
+            navigate(`/${id}`);
+            videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video });
+          }}
+        >
+          <img src={videoThumbnail} alt={name} className={styles.image} />
         </div>
-        <div className={styles.descriptionContainer} onClick={() => navigate(`/${id}`)}>
-          <h3> {name} </h3>
+        <div className={styles.descriptionContainer}>
+          <h3
+            onClick={() => {
+              navigate(`/${id}`);
+              videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video });
+            }}
+          >
+            {name}
+          </h3>
           <p className={styles.channelName}> {channel} </p>
           <p className={styles.views}> {views} views </p>
         </div>

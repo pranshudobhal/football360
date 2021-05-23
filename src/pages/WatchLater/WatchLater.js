@@ -12,7 +12,7 @@ export function WatchLater() {
       </div>
       <div className={styles.container}>
         {watchLater.map((video) => (
-          <WatchLaterCard video={video} />
+          <WatchLaterCard key={video.id} video={video} />
         ))}
       </div>
     </div>

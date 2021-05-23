@@ -13,14 +13,14 @@ export function VideoCard({ video }) {
   return (
     <div key={id} className={styles.container}>
       <Link to={`/${id}`} className={styles.link}>
-        <div onClick={() => videoDispatch({ type: 'ADD_VIDEO_TO_HISTORY', payload: video })}>
+        <div onClick={() => videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video })}>
           <img src={videoThumbnail} className={styles.image} alt={name} />
         </div>
       </Link>
 
       <div className={styles.description}>
         <Link to={`/${id}`} className={styles.link}>
-          <h3 className={styles.title} onClick={() => videoDispatch({ type: 'ADD_VIDEO_TO_HISTORY', payload: video })}>
+          <h3 className={styles.title} onClick={() => videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video })}>
             {name}
           </h3>
         </Link>

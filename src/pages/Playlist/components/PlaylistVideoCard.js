@@ -11,7 +11,7 @@ import { useState } from 'react';
 export function PlaylistVideoCard({ videoID, playlistID }) {
   const { videos, videoDispatch, watchLater } = useData();
   const videoItem = videos.find((video) => video.id === videoID);
-  const { id, name, url, channel, videoThumbnail } = videoItem;
+  const { id, name, channel, videoThumbnail } = videoItem;
   const isInWatchLater = watchLater.find((video) => video.id === id);
   const [moreModal, showMoreModal] = useState(false);
   const navigate = useNavigate();
@@ -20,14 +20,25 @@ export function PlaylistVideoCard({ videoID, playlistID }) {
   return (
     <div>
       <div key={id} className={styles.playlistVideoCardContainer}>
-        <div className={styles.imageContainer} onClick={() => navigate(`/${id}`)}>
-          <a href={url} className={styles.imageAnchor} onClick={() => videoDispatch({ type: 'ADD_VIDEO_TO_HISTORY', payload: videoItem })}>
-            <img src={videoThumbnail} alt={name} className={styles.image} />
-          </a>
+        <div
+          className={styles.imageContainer}
+          onClick={() => {
+            navigate(`/${id}`);
+            videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: videoItem });
+          }}
+        >
+          <img src={videoThumbnail} alt={name} className={styles.image} />
         </div>
         <div className={styles.container}>
-          <div className={styles.descriptionContainer} onClick={() => navigate(`/${id}`)}>
-            <h3> {name} </h3>
+          <div className={styles.descriptionContainer}>
+            <h3
+              onClick={() => {
+                navigate(`/${id}`);
+                videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: videoItem });
+              }}
+            >
+              {name}
+            </h3>
             <p className={styles.channelName}> {channel} </p>
           </div>
           <div className={styles.action}>

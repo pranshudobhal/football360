@@ -27,6 +27,7 @@
 .actions span {
   display: inline-block;
   margin-left: 0.5rem;
+  cursor: pointer;
 }
 
 .container {
@@ -34,4 +35,11 @@
   grid-template-columns: 1fr;
   row-gap: 1rem;
   margin: 2rem 0;
+}
+
+@media screen and (min-width: 1025px) {
+  .playlistPageContainer {
+    width: 40vw;
+    margin: 2rem auto;
+  }
 }

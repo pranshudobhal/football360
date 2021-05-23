@@ -28,8 +28,11 @@ export const dataReducer = (state, action) => {
     case 'TOGGLE_LIKED_VIDEO':
       return { ...state, likedVideos: state.likedVideos.find((video) => video.id === action.payload.id) ? state.likedVideos.filter((video) => video.id !== action.payload.id) : [...state.likedVideos, { ...action.payload }] };
 
-    case 'ADD_VIDEO_TO_HISTORY':
+    case 'ADD_VIDEO_TO_WATCH_HISTORY':
       return { ...state, history: state.history.find((video) => video.id === action.payload.id) ? [...state.history.filter((video) => video.id !== action.payload.id), { ...action.payload }] : [...state.history, { ...action.payload }] };
+
+    case 'CLEAR_WATCH_HISTORY':
+      return { ...state, history: [] };
 
     case 'CREATE_PLAYLIST':
       return {

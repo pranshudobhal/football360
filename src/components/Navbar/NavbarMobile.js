@@ -1,13 +1,3 @@
-/*
- * --------------TODO--------------
- * library (which will consist of sign in if not signed in or history, watch later, * liked videos and playlists as lists)
- */
-
-/*
- * --------------DONE--------------
- * Navbar mobile made with navigations working
- */
-
 import styles from './NavbarMobile.module.css';
 import { NavLink } from 'react-router-dom';
 

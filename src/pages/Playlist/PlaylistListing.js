@@ -4,7 +4,6 @@ import styles from './PlaylistListing.module.css';
 
 export function PlaylistListing() {
   const { playlists } = useData();
-  console.log(playlists);
 
   return (
     <div className={styles.playlistListingContainer}>
@@ -12,8 +11,8 @@ export function PlaylistListing() {
         <h1>Playlists</h1>
       </div>
       <div className={styles.container}>
-        {playlists.map((playlistItem, index) => (
-          <PlaylistCard key={index} playlistItem={playlistItem} />
+        {playlists.map((playlistItem) => (
+          <PlaylistCard key={playlistItem.id} playlistItem={playlistItem} />
         ))}
       </div>
     </div>

@@ -6,7 +6,7 @@ export function Trending() {
   return (
     <div className={styles.container}>
       {[...data].reverse().map((video) => (
-        <VideoCard video={video} />
+        <VideoCard key={video.id} video={video} />
       ))}
     </div>
   );
