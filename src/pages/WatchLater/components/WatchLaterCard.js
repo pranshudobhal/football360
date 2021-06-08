@@ -3,14 +3,32 @@ import { useData } from '../../../context';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import styles from './WatchLaterCard.module.css';
 import { useState } from 'react';
+import axios from 'axios';
 
 export function WatchLaterCard({ video }) {
-  const { id, name, channel, videoThumbnail, views } = video;
+  const { _id: id, name, channel, videoThumbnail, views } = video;
   const { videoDispatch, watchLater } = useData();
   const [moreModal, showMoreModal] = useState(false);
-  const isInWatchLater = watchLater.find((video) => video.id === id);
+  const isInWatchLater = watchLater?.find((video) => video._id === id);
   const navigate = useNavigate();
   const toggleModal = () => showMoreModal((moreModal) => !moreModal);
+
+  const toggleWatchLater = async (id) => {
+    try {
+      let response;
+      if (isInWatchLater) {
+        response = await axios.delete(`http://localhost:3000/watchlater/${id}`);
+      } else {
+        response = await axios.post(`http://localhost:3000/watchlater/${id}`);
+      }
+
+      if (response.status === 200) {
+        videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: video });
+      }
+    } catch (error) {
+      console.error('Error toggling in watch later ', error);
+    }
+  };
 
   return (
     <div>
@@ -52,7 +70,7 @@ export function WatchLaterCard({ video }) {
                   <li
                     onClick={() => {
                       toggleModal();
-                      videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: video });
+                      toggleWatchLater(id);
                     }}
                   >
                     {isInWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}

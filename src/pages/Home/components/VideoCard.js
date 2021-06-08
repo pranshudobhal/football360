@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import styles from './VideoCard.module.css';
 
 export function VideoCard({ video }) {
-  const { id, name, channel, videoThumbnail, views } = video;
+  const { _id: id, name, channel, videoThumbnail, views } = video;
   const { videoDispatch } = useData();
 
   return (
