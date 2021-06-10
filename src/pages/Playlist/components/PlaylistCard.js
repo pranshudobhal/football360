@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router';
 import OpenInNewIcon from '@material-ui/icons/OpenInNew';
 
 export function PlaylistCard({ playlistItem }) {
-  const { id, name, videos } = playlistItem;
+  const { _id: id, name, videos } = playlistItem;
 
   const navigate = useNavigate();
 
@@ -25,8 +25,8 @@ export function PlaylistCard({ playlistItem }) {
           <div className={styles.emptyContainer}>No vidoes in this playlist</div>
         ) : (
           <div className={styles.videoContainer}>
-            {videos.map((videoID) => (
-              <PlaylistVideoCard key={videoID} videoID={videoID} playlistID={id} />
+            {videos.map((video) => (
+              <PlaylistVideoCard key={video._id} video={video} playlistID={id} />
             ))}
           </div>
         )}

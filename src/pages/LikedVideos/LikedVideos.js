@@ -12,7 +12,7 @@ export function LikedVideos() {
       </div>
       <div className={styles.container}>
         {likedVideos.map((video) => (
-          <LikedVideosCard key={video.id} video={video} />
+          <LikedVideosCard key={video._id} video={video} />
         ))}
       </div>
     </div>

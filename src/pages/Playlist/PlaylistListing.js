@@ -11,8 +11,8 @@ export function PlaylistListing() {
         <h1>Playlists</h1>
       </div>
       <div className={styles.container}>
-        {playlists.map((playlistItem) => (
-          <PlaylistCard key={playlistItem.id} playlistItem={playlistItem} />
+        {playlists?.map((playlistItem, index) => (
+          <PlaylistCard key={index} playlistItem={playlistItem} />
         ))}
       </div>
     </div>

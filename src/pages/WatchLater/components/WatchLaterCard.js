@@ -13,13 +13,13 @@ export function WatchLaterCard({ video }) {
   const navigate = useNavigate();
   const toggleModal = () => showMoreModal((moreModal) => !moreModal);
 
-  const toggleWatchLater = async (id) => {
+  const toggleWatchLater = async (videoID) => {
     try {
       let response;
       if (isInWatchLater) {
-        response = await axios.delete(`http://localhost:3000/watchlater/${id}`);
+        response = await axios.delete(`http://localhost:3000/watchlater/${videoID}`);
       } else {
-        response = await axios.post(`http://localhost:3000/watchlater/${id}`);
+        response = await axios.post(`http://localhost:3000/watchlater/${videoID}`);
       }
 
       if (response.status === 200) {
@@ -30,6 +30,18 @@ export function WatchLaterCard({ video }) {
     }
   };
 
+  const addToWatchHistory = async (videoID) => {
+    try {
+      const response = axios.post(`http://localhost:3000/history/${videoID}`);
+
+      if (response.status === 200) {
+        videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video });
+      }
+    } catch (error) {
+      console.error('Error adding to watch history ', error);
+    }
+  };
+
   return (
     <div>
       <div key={id} className={styles.watchLaterCardContainer}>
@@ -37,7 +49,7 @@ export function WatchLaterCard({ video }) {
           className={styles.imageContainer}
           onClick={() => {
             navigate(`/${id}`);
-            videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video });
+            addToWatchHistory(id);
           }}
         >
           <img src={videoThumbnail} alt={name} className={styles.image} />
@@ -46,7 +58,7 @@ export function WatchLaterCard({ video }) {
           <h3
             onClick={() => {
               navigate(`/${id}`);
-              videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video });
+              addToWatchHistory(id);
             }}
           >
             {name}

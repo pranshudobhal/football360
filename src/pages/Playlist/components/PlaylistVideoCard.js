@@ -9,29 +9,52 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useState } from 'react';
 import axios from 'axios';
 
-export function PlaylistVideoCard({ videoID, playlistID }) {
-  const { videos, videoDispatch, watchLater } = useData();
-  const videoItem = videos?.find((video) => video._id === videoID);
-  const { _id: id, name, channel, videoThumbnail } = videoItem;
+export function PlaylistVideoCard({ video, playlistID }) {
+  const { videoDispatch, watchLater } = useData();
+  const { _id: id, name, channel, videoThumbnail } = video;
   const isInWatchLater = watchLater?.find((video) => video._id === id);
   const [moreModal, showMoreModal] = useState(false);
   const navigate = useNavigate();
   const toggleModal = () => showMoreModal((moreModal) => !moreModal);
 
-  const toggleWatchLater = async (id) => {
+  const removeVideoFromPlaylist = async (playlistID, videoID) => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/playlist/${playlistID}/${videoID}`);
+
+      if (response.status === 200) {
+        videoDispatch({ type: 'TOGGLE_VIDEO_IN_PLAYLIST', payload: { video, playlistID } });
+      }
+    } catch (error) {
+      console.error('Error removing video from playlist', error);
+    }
+  };
+
+  const toggleWatchLater = async (videoID) => {
     try {
       let response;
       if (isInWatchLater) {
-        response = await axios.delete(`http://localhost:3000/watchlater/${id}`);
+        response = await axios.delete(`http://localhost:3000/watchlater/${videoID}`);
       } else {
-        response = await axios.post(`http://localhost:3000/watchlater/${id}`);
+        response = await axios.post(`http://localhost:3000/watchlater/${videoID}`);
       }
 
       if (response.status === 200) {
-        videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: videoItem });
+        videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: video });
       }
     } catch (error) {
       console.error('Error toggling in watch later ', error);
+    }
+  };
+
+  const addToWatchHistory = async (videoID) => {
+    try {
+      const response = axios.post(`http://localhost:3000/history/${videoID}`);
+
+      if (response.status === 200) {
+        videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video });
+      }
+    } catch (error) {
+      console.error('Error adding to watch history ', error);
     }
   };
 
@@ -42,7 +65,7 @@ export function PlaylistVideoCard({ videoID, playlistID }) {
           className={styles.imageContainer}
           onClick={() => {
             navigate(`/${id}`);
-            videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: videoItem });
+            addToWatchHistory(id);
           }}
         >
           <img src={videoThumbnail} alt={name} className={styles.image} />
@@ -52,7 +75,7 @@ export function PlaylistVideoCard({ videoID, playlistID }) {
             <h3
               onClick={() => {
                 navigate(`/${id}`);
-                videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: videoItem });
+                addToWatchHistory(id);
               }}
             >
               {name}
@@ -83,7 +106,7 @@ export function PlaylistVideoCard({ videoID, playlistID }) {
                     <li
                       onClick={() => {
                         toggleModal();
-                        videoDispatch({ type: 'TOGGLE_VIDEO_IN_PLAYLIST', payload: { videoID, playlistID } });
+                        removeVideoFromPlaylist(playlistID, id);
                       }}
                     >
                       Remove video from playlist

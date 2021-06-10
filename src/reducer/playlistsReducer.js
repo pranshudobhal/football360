@@ -1,48 +1,36 @@
-/**
- * TODO:
- * 1. change id assigned
- */
 export const playlistsReducer = (state, action) => {
   switch (action.type) {
     case 'INITIALIZE_PLAYLIST':
       return [...action.payload];
 
     case 'CREATE_PLAYLIST':
-      return {
+      return [
         ...state,
-        playlists: [
-          ...state.playlists,
-          {
-            id: 1,
-            name: action.payload.playlistName,
-            videos: [action.payload.id],
-          },
-        ],
-      };
+        {
+          name: action.payload.playlistName,
+          videos: [action.payload.video],
+        },
+      ];
 
     case 'TOGGLE_VIDEO_IN_PLAYLIST':
-      return {
-        ...state,
-        playlists: state.playlists.map((playlistItem) => {
-          if (playlistItem.id === action.payload.playlistID) {
-            return { ...playlistItem, videos: playlistItem.videos.find((id) => id === action.payload.videoID) ? playlistItem.videos.filter((id) => id !== action.payload.videoID) : [...playlistItem.videos, action.payload.videoID] };
+      return [
+        ...state.map((playlistItem) => {
+          if (playlistItem._id === action.payload.playlistID) {
+            return {
+              ...playlistItem,
+              videos: playlistItem.videos.find((video) => video._id === action.payload.video._id) ? playlistItem.videos.filter((video) => video._id !== action.payload.video._id) : [...playlistItem.videos, action.payload.video],
+            };
           } else {
             return { ...playlistItem };
           }
         }),
-      };
+      ];
 
     case 'DELETE_PLAYLIST':
-      return {
-        ...state,
-        playlists: state.playlists.filter((playlistItem) => playlistItem.id !== action.payload.id),
-      };
+      return [...state?.filter((playlistItem) => playlistItem._id !== action.payload)];
 
     case 'UPDATE_PLAYLIST_NAME':
-      return {
-        ...state,
-        playlists: state.playlists.map((playlistItem) => (playlistItem.id === action.payload.id ? { ...playlistItem, name: action.payload.name } : playlistItem)),
-      };
+      return [...state?.map((playlistItem) => (playlistItem._id === action.payload.playlistID ? { ...playlistItem, name: action.payload.name } : playlistItem))];
 
     default:
       return state;

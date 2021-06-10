@@ -17,20 +17,47 @@ export function VideoPage() {
   const { videos, videoDispatch, likedVideos, watchLater, playlists } = useData();
   const isInLikedVideos = likedVideos?.find((video) => video._id === videoID);
   const isInWatchLater = watchLater?.find((video) => video._id === videoID);
+  /**
+   * FIXME:
+   * 1. isInPlaylist giving issue, when unchecking, network call going but not reflecting on FE
+   * 2. margin at bottom, content hiding below bottom navbar
+   * 3. When creating a new playlist, if i go to that specific individual playlist, then it redirects to error page
+   *    basically it is not assigning _id so thats why
+   * playlists: Array(7)
+      0: {videos: Array(0), _id: "60c1e6a217829f491471b304", name: "New2"}
+      1: {videos: Array(1), _id: "60c27c58f0bc0146383f3ae1", name: "New1"}
+      2: {videos: Array(1), _id: "60c27c8df0bc0146383f3ae2", name: "New3"}
+      3: {videos: Array(1), _id: "60c27d2ef0bc0146383f3ae3", name: "new4"}
+      4: {videos: Array(1), _id: "60c27d52f0bc0146383f3ae4", name: "new5"}
+      5: {videos: Array(1), _id: "60c27dacf0bc0146383f3ae5", name: "new6"}
+      6: {name: "new7", videos: Array(1)}
+      length: 7
+   */
+
+  /**FIXME:
+   * /playlist solves navigate after delete but individual playlists dont open- playlist page line 26, line 50
+   */
+
+  /**
+   * FIXME:
+   * BACKEND:
+   * 1. Add additional check in backend, DO NOT ADD if video is already added
+   */
+
   const isInPlaylist = (playlistID) => {
     const playlist = playlists?.find((playlistItem) => playlistItem._id === playlistID);
-    return playlist?.videos.find((video) => video === videoID);
+    return playlist?.videos.find((video) => video._id === videoID);
   };
 
   const video = videos?.find((video) => video._id === videoID);
 
-  const toggleLikedVideos = async (id) => {
+  const toggleLikedVideos = async (videoID) => {
     try {
       let response;
       if (isInLikedVideos) {
-        response = await axios.delete(`http://localhost:3000/likedvideo/${id}`);
+        response = await axios.delete(`http://localhost:3000/likedvideo/${videoID}`);
       } else {
-        response = await axios.post(`http://localhost:3000/likedvideo/${id}`);
+        response = await axios.post(`http://localhost:3000/likedvideo/${videoID}`);
       }
 
       if (response.status === 200) {
@@ -41,13 +68,13 @@ export function VideoPage() {
     }
   };
 
-  const toggleWatchLater = async (id) => {
+  const toggleWatchLater = async (videoID) => {
     try {
       let response;
       if (isInWatchLater) {
-        response = await axios.delete(`http://localhost:3000/watchlater/${id}`);
+        response = await axios.delete(`http://localhost:3000/watchlater/${videoID}`);
       } else {
-        response = await axios.post(`http://localhost:3000/watchlater/${id}`);
+        response = await axios.post(`http://localhost:3000/watchlater/${videoID}`);
       }
 
       if (response.status === 200) {
@@ -55,6 +82,35 @@ export function VideoPage() {
       }
     } catch (error) {
       console.error('Error toggling in watch later ', error);
+    }
+  };
+
+  const toggleVideoInPlaylist = async (playlistID, videoID) => {
+    try {
+      let response;
+
+      if (isInPlaylist()) {
+        response = await axios.delete(`http://localhost:3000/playlist/${playlistID}/${videoID}`);
+      } else {
+        response = await axios.post(`http://localhost:3000/playlist/${playlistID}/${videoID}`);
+      }
+
+      if (response.status === 200) {
+        videoDispatch({ type: 'TOGGLE_VIDEO_IN_PLAYLIST', payload: { video, playlistID } });
+      }
+    } catch (error) {
+      console.error('Error toggling in playlist', error);
+    }
+  };
+
+  const createNewPlaylist = async () => {
+    if (playlistName !== '') {
+      const response = await axios.post('http://localhost:3000/playlist/', { videoID: videoID, playlistName: playlistName });
+
+      if (response.status === 200) {
+        videoDispatch({ type: 'CREATE_PLAYLIST', payload: { playlistName, video } });
+        setplaylistName('');
+      }
     }
   };
 
@@ -90,10 +146,10 @@ export function VideoPage() {
               {playlistModal && (
                 <div className={styles.playlistmodal}>
                   <ul>
-                    {playlists.map((playlistItem) => (
-                      <li key={playlistItem.id}>
-                        <input id={playlistItem.id} checked={isInPlaylist(playlistItem.id)} type="checkbox" onChange={() => videoDispatch({ type: 'TOGGLE_VIDEO_IN_PLAYLIST', payload: { playlistID: playlistItem.id, videoID: id } })} />
-                        <label htmlFor={playlistItem.id}>{playlistItem.name}</label>
+                    {playlists?.map((playlistItem, index) => (
+                      <li key={index}>
+                        <input id={playlistItem._id} checked={isInPlaylist(playlistItem._id)} type="checkbox" onChange={() => toggleVideoInPlaylist(playlistItem._id, _id)} />
+                        <label htmlFor={playlistItem._id}>{playlistItem.name}</label>
                       </li>
                     ))}
                     <li key="playlistinput">
@@ -104,19 +160,16 @@ export function VideoPage() {
                           setplaylistName(e.target.value);
                         }}
                       />
-                      <span
-                        onClick={() => {
-                          if (playlistName !== '') {
-                            videoDispatch({ type: 'CREATE_PLAYLIST', payload: { playlistName, id } });
-                            setplaylistName('');
-                          }
-                        }}
-                      >
-                        Create
-                      </span>
+                      <span onClick={() => createNewPlaylist()}>Create</span>
                     </li>
                   </ul>
-                  <div className={styles.closemodal} onClick={() => showPlaylistModal((playlistModal) => !playlistModal)}>
+                  <div
+                    className={styles.closemodal}
+                    onClick={() => {
+                      showPlaylistModal((playlistModal) => !playlistModal);
+                      setplaylistName('');
+                    }}
+                  >
                     <span>Close</span>
                   </div>
                 </div>

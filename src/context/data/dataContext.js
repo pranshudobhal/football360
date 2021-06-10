@@ -22,10 +22,10 @@ export function DataProvider({ children }) {
         const historyResponse = await axios.get(`http://localhost:3000/history`);
 
         dispatch({ type: 'INITIALIZE_VIDEOS', payload: videosResponse.data.allVideos });
-        dispatch({ type: 'INITIALIZE_LIKED_VIDEOS', payload: likedVideosResponse.data.allLikedVideos });
-        dispatch({ type: 'INITIALIZE_WATCH_LATER', payload: watchLaterResponse.data.allWatchLater });
-        dispatch({ type: 'INITIALIZE_PLAYLIST', payload: playlistResponse.data.allPlaylists });
-        dispatch({ type: 'INITIALIZE_HISTORY', payload: historyResponse.data.allHistory });
+        dispatch({ type: 'INITIALIZE_LIKED_VIDEOS', payload: likedVideosResponse.data.allLikedVideos.videos });
+        dispatch({ type: 'INITIALIZE_WATCH_LATER', payload: watchLaterResponse.data.allWatchLater.videos });
+        dispatch({ type: 'INITIALIZE_PLAYLIST', payload: playlistResponse.data.allPlaylists.playlists });
+        dispatch({ type: 'INITIALIZE_HISTORY', payload: historyResponse.data.allHistory.videos });
       } catch (error) {
         console.error('Error initializing data from backend!!! ' + error);
       }
