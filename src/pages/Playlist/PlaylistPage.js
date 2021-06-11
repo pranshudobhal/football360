@@ -46,14 +46,13 @@ export function PlaylistPage() {
   useEffect(() => {
     const isPlaylistPresent = playlists?.some((playlist) => playlist._id === playlistID);
 
-    !isPlaylistPresent && playlists && navigate('/playlist');
-    // !isPlaylistPresent && playlists && navigate('/*');
+    !isPlaylistPresent && playlists && navigate('/*');
 
     setPlaylistName(playlist?.name);
   }, [playlists]);
 
   if (playlist) {
-    const { _id, videos } = playlist;
+    const { _id, name, videos } = playlist;
 
     function editPlaylistName() {
       if (!isEditable) {
@@ -67,7 +66,7 @@ export function PlaylistPage() {
     return (
       <div className={styles.playlistPageContainer}>
         <div className={styles.playlistName}>
-          <input type="text" value={playlistName} readOnly={!isEditable} ref={playlistInput} onChange={(e) => setPlaylistName(() => e.target.value)} />
+          <input type="text" defaultValue={name} readOnly={!isEditable} ref={playlistInput} onChange={(e) => setPlaylistName(() => e.target.value)} />
           <div className={styles.actions}>
             <span onClick={() => editPlaylistName()}>{!isEditable ? <EditOutlinedIcon style={{ fontSize: 25 }} /> : <DoneIcon style={{ fontSize: 25 }} />}</span>
             <span onClick={() => deletePlaylist(_id)}>

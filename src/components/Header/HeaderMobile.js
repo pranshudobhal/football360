@@ -1,5 +1,6 @@
 import styles from './HeaderMobile.module.css';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { NavLink } from 'react-router-dom';
 
 export function HeaderMobile() {
@@ -12,6 +13,7 @@ export function HeaderMobile() {
       </NavLink>
       <div className={styles.actions}>
         <SearchOutlinedIcon style={{ fontSize: 25 }} color="disabled" />
+        <AccountCircleIcon style={{ fontSize: 27 }} />
       </div>
     </div>
   );

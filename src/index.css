@@ -11,7 +11,9 @@ html {
 
 :root {
   --primary-color: #111111;
-  --secondary-color: #ff3f6c;
+  /* --secondary-color: #ff3f6c; */
+  --secondary-color: #86C232;
+  --secondary-color-background: #fafff2;  
   --white: #fff;
   --gray: #6b7280;
   --button-color: rgb(17, 17, 17, 0.6);

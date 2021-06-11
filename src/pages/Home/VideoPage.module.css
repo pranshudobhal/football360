@@ -187,6 +187,7 @@
   .container {
     width: 90vw;
     margin-bottom: 12rem;
+    padding-bottom: 10rem;
   }
 
   .videocontainer {
@@ -199,6 +200,7 @@
     width: 70vw;
     margin-bottom: 12rem;
     padding-left: 1rem;
+    padding-bottom: 10rem;
   }
 
   .videocontainer {

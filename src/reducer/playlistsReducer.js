@@ -7,6 +7,7 @@ export const playlistsReducer = (state, action) => {
       return [
         ...state,
         {
+          _id: action.payload._id,
           name: action.payload.playlistName,
           videos: [action.payload.video],
         },

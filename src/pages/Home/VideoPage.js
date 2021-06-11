@@ -9,6 +9,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 export function VideoPage() {
   const { videoID } = useParams();
@@ -19,23 +20,13 @@ export function VideoPage() {
   const isInWatchLater = watchLater?.find((video) => video._id === videoID);
   /**
    * FIXME:
-   * 1. isInPlaylist giving issue, when unchecking, network call going but not reflecting on FE
+   * 1. isInPlaylist giving issue, when unchecking, network call going but not reflecting on FE -- done
    * 2. margin at bottom, content hiding below bottom navbar
-   * 3. When creating a new playlist, if i go to that specific individual playlist, then it redirects to error page
-   *    basically it is not assigning _id so thats why
-   * playlists: Array(7)
-      0: {videos: Array(0), _id: "60c1e6a217829f491471b304", name: "New2"}
-      1: {videos: Array(1), _id: "60c27c58f0bc0146383f3ae1", name: "New1"}
-      2: {videos: Array(1), _id: "60c27c8df0bc0146383f3ae2", name: "New3"}
-      3: {videos: Array(1), _id: "60c27d2ef0bc0146383f3ae3", name: "new4"}
-      4: {videos: Array(1), _id: "60c27d52f0bc0146383f3ae4", name: "new5"}
-      5: {videos: Array(1), _id: "60c27dacf0bc0146383f3ae5", name: "new6"}
-      6: {name: "new7", videos: Array(1)}
-      length: 7
+   * 3. When creating a new playlist, if i go to that specific individual playlist, then it redirects to error page -- DONE
    */
 
   /**FIXME:
-   * /playlist solves navigate after delete but individual playlists dont open- playlist page line 26, line 50
+   * /playlist solves navigate after delete but individual playlists dont open- playlist page line 26, line 50 -- to check
    */
 
   /**
@@ -46,7 +37,7 @@ export function VideoPage() {
 
   const isInPlaylist = (playlistID) => {
     const playlist = playlists?.find((playlistItem) => playlistItem._id === playlistID);
-    return playlist?.videos.find((video) => video._id === videoID);
+    return playlist?.videos.find((video) => video._id === videoID) ? true : false;
   };
 
   const video = videos?.find((video) => video._id === videoID);
@@ -89,7 +80,7 @@ export function VideoPage() {
     try {
       let response;
 
-      if (isInPlaylist()) {
+      if (isInPlaylist(playlistID)) {
         response = await axios.delete(`http://localhost:3000/playlist/${playlistID}/${videoID}`);
       } else {
         response = await axios.post(`http://localhost:3000/playlist/${playlistID}/${videoID}`);
@@ -105,10 +96,12 @@ export function VideoPage() {
 
   const createNewPlaylist = async () => {
     if (playlistName !== '') {
+      // const response = await axios.post('http://localhost:3000/playlist/', { videoID: videoID, playlistName: playlistName });
       const response = await axios.post('http://localhost:3000/playlist/', { videoID: videoID, playlistName: playlistName });
 
+      console.log(response);
       if (response.status === 200) {
-        videoDispatch({ type: 'CREATE_PLAYLIST', payload: { playlistName, video } });
+        videoDispatch({ type: 'CREATE_PLAYLIST', payload: { _id: response.data.newPlaylist._id, playlistName, video } });
         setplaylistName('');
       }
     }

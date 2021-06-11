@@ -47,7 +47,7 @@
 
 .navlink:hover {
   color: var(--secondary-color);
-  background-color: rgba(220, 0, 78, 0.04);
+  background-color: var(--secondary-color-background)
 }
 
 .active {
