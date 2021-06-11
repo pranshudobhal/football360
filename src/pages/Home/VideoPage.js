@@ -9,7 +9,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import axios from 'axios';
-import { v4 as uuidv4 } from 'uuid';
 
 export function VideoPage() {
   const { videoID } = useParams();
@@ -18,22 +17,6 @@ export function VideoPage() {
   const { videos, videoDispatch, likedVideos, watchLater, playlists } = useData();
   const isInLikedVideos = likedVideos?.find((video) => video._id === videoID);
   const isInWatchLater = watchLater?.find((video) => video._id === videoID);
-  /**
-   * FIXME:
-   * 1. isInPlaylist giving issue, when unchecking, network call going but not reflecting on FE -- done
-   * 2. margin at bottom, content hiding below bottom navbar
-   * 3. When creating a new playlist, if i go to that specific individual playlist, then it redirects to error page -- DONE
-   */
-
-  /**FIXME:
-   * /playlist solves navigate after delete but individual playlists dont open- playlist page line 26, line 50 -- to check
-   */
-
-  /**
-   * FIXME:
-   * BACKEND:
-   * 1. Add additional check in backend, DO NOT ADD if video is already added
-   */
 
   const isInPlaylist = (playlistID) => {
     const playlist = playlists?.find((playlistItem) => playlistItem._id === playlistID);
@@ -96,7 +79,6 @@ export function VideoPage() {
 
   const createNewPlaylist = async () => {
     if (playlistName !== '') {
-      // const response = await axios.post('http://localhost:3000/playlist/', { videoID: videoID, playlistName: playlistName });
       const response = await axios.post('http://localhost:3000/playlist/', { videoID: videoID, playlistName: playlistName });
 
       console.log(response);

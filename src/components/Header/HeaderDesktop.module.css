@@ -16,6 +16,10 @@
   cursor: pointer;
 }
 
+.logo span {
+  color: var(--secondary-color);
+}
+
 .search {
   cursor: pointer;
   display: flex;
@@ -23,8 +27,15 @@
   align-items: center;
 }
 
+.search span {
+  /* border: 1px solid black; */
+  background-color: var(--secondary-color);
+  padding: 0.25rem 3rem;
+  border-radius: 5px;
+}
+
 .search input[type='search'] {
-  width: 40vw;
+  width: calc(40vw - 3rem);
   padding: 0.5rem 1rem;
   border: 1px solid var(--border-color);
   margin-right: 0.25rem;

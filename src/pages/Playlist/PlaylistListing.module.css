@@ -1,6 +1,7 @@
 .playlistListingContainer {
   width: 95vw;
   margin: 0 auto;
+  padding-bottom: 5rem;
 }
 
 .heading {
@@ -24,5 +25,6 @@
   .playlistListingContainer {
     width: 60vw;
     margin: 2rem auto;
+    padding-bottom: 2rem;
   }
 }

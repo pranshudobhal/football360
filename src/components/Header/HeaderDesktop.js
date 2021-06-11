@@ -8,12 +8,16 @@ export function HeaderDesktop() {
     <div className={styles.container}>
       <NavLink to="/" className={styles.navlink}>
         <div className={styles.logo}>
-          <h2>Football360</h2>
+          <h2>
+            Football<span>360</span>
+          </h2>
         </div>
       </NavLink>
       <div className={styles.search}>
         <input type="search" id="search-bar" name="search-bar" placeholder="Search" />
-        <SearchOutlinedIcon style={{ fontSize: 25 }} color="disabled" />
+        <span>
+          <SearchOutlinedIcon style={{ fontSize: 25 }} style={{ color: 'white' }} />
+        </span>
       </div>
       <div className={styles.user}>
         <AccountCircleIcon style={{ fontSize: 27 }} />

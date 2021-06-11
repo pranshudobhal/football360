@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useData } from '../../context';
-import { Error404 } from '../Error/Error404';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import DoneIcon from '@material-ui/icons/Done';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';

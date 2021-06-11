@@ -1,6 +1,7 @@
 .likedVideosContainer {
   width: 95vw;
   margin: 0 auto;
+  padding-bottom: 5rem;
 }
 
 .heading {
@@ -29,6 +30,7 @@
 @media screen and (min-width: 1025px) {
   .likedVideosContainer {
     width: 40vw;
+    padding-bottom: 2rem;
     margin: 2rem auto;
   }
 }

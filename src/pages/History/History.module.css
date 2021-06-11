@@ -1,6 +1,7 @@
 .historyContainer {
   width: 95vw;
   margin: 0 auto;
+  padding-bottom: 5rem;
 }
 
 .heading {
@@ -43,5 +44,6 @@
   .historyContainer {
     width: 40vw;
     margin: 2rem auto;
+    padding-bottom: 2rem;
   }
 }
