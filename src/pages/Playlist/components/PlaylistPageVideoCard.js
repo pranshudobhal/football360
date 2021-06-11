@@ -44,7 +44,7 @@ export function PlaylistPageVideoCard({ video, playlistID }) {
 
   const addToWatchHistory = async (videoID) => {
     try {
-      const response = axios.post(`http://localhost:3000/history/${videoID}`);
+      const response = await axios.post(`http://localhost:3000/history/${videoID}`);
 
       if (response.status === 200) {
         videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video });

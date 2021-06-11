@@ -26,7 +26,7 @@ export function History() {
       </div>
       <div className={styles.container}>
         {history && [...history].reverse().map((video) => <HistoryCard key={video._id} video={video} />)}
-        {history.length === 0 && (
+        {history?.length === 0 && (
           <>
             <h1>No watch history</h1>
           </>

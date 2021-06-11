@@ -16,7 +16,7 @@ export function HeaderDesktop() {
       <div className={styles.search}>
         <input type="search" id="search-bar" name="search-bar" placeholder="Search" />
         <span>
-          <SearchOutlinedIcon style={{ fontSize: 25 }} style={{ color: 'white' }} />
+          <SearchOutlinedIcon style={{ fontSize: 25, color: 'white' }} />
         </span>
       </div>
       <div className={styles.user}>
