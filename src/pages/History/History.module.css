@@ -24,7 +24,7 @@
 }
 
 .heading button:hover {
-  background-color: rgba(0, 0, 0, 0.04);
+  background-color: var(--secondary-color-background);
 }
 
 .container {
@@ -38,6 +38,13 @@
   grid-template-columns: 1fr;
   row-gap: 2rem;
   margin-bottom: 6rem;
+}
+
+.noHistory {
+  display: grid;
+  place-items: center;
+  min-height: 50vh;
+  color: var(--gray-light);
 }
 
 @media screen and (min-width: 1025px) {

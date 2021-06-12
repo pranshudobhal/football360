@@ -7,6 +7,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import styles from './PlaylistPage.module.css';
 import { PlaylistPageVideoCard } from './components/PlaylistPageVideoCard';
 import axios from 'axios';
+import { Loader } from '../../components';
 
 export function PlaylistPage() {
   const { playlistID } = useParams();
@@ -22,8 +23,8 @@ export function PlaylistPage() {
       const response = await axios.delete(`http://localhost:3000/playlist/${playlistID}`);
 
       if (response.status === 200) {
-        videoDispatch({ type: 'DELETE_PLAYLIST', payload: playlistID });
         navigate('/playlist');
+        videoDispatch({ type: 'DELETE_PLAYLIST', payload: playlistID });
       }
     } catch (error) {
       console.error('Error deleting playlist', error);
@@ -78,10 +79,15 @@ export function PlaylistPage() {
           {videos?.map((video) => (
             <PlaylistPageVideoCard key={video._id} video={video} playlistID={_id} />
           ))}
+          {videos?.length === 0 && (
+            <div className={styles.noVideosInPlaylist}>
+              <h3>No vidoes in this playlist</h3>
+            </div>
+          )}
         </div>
       </div>
     );
   } else {
-    return <h1>loading</h1>;
+    return <Loader />;
   }
 }

@@ -1,6 +1,7 @@
 import { useData } from '../../context';
 import { WatchLaterCard } from './components/WatchLaterCard';
 import styles from './WatchLater.module.css';
+import { Loader } from '../../components';
 
 export function WatchLater() {
   const { watchLater } = useData();
@@ -10,11 +11,20 @@ export function WatchLater() {
       <div className={styles.heading}>
         <h1>Watch Later</h1>
       </div>
-      <div className={styles.container}>
-        {watchLater.map((video) => (
-          <WatchLaterCard key={video._id} video={video} />
-        ))}
-      </div>
+      {watchLater === null ? (
+        <Loader />
+      ) : (
+        <div className={styles.container}>
+          {watchLater.map((video) => (
+            <WatchLaterCard key={video._id} video={video} />
+          ))}
+          {watchLater?.length === 0 && (
+            <div className={styles.noWatchLater}>
+              <h3>No videos to watch later</h3>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

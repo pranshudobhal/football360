@@ -1,4 +1,4 @@
-import { VideoListing, VideoPage, Trending, History, PlaylistListing, PlaylistPage, WatchLater, LikedVideos, Library, Error404 } from './pages';
+import { VideoListing, Login, VideoPage, Trending, History, PlaylistListing, PlaylistPage, WatchLater, LikedVideos, Library, Error404 } from './pages';
 import { Header, Navbar } from './components';
 import { Routes, Route } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<VideoListing />} />
         <Route path="/trending" element={<Trending />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/:videoID" element={<VideoPage />} />
         <Route path="/history" element={<History />} />
         <Route path="/playlist" element={<PlaylistListing />} />

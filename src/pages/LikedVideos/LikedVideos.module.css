@@ -27,6 +27,13 @@
   row-gap: 1rem;
 }
 
+.noLikedVideos {
+  display: grid;
+  place-items: center;
+  min-height: 50vh;
+  color: var(--gray-light);
+}
+
 @media screen and (min-width: 1025px) {
   .likedVideosContainer {
     width: 40vw;

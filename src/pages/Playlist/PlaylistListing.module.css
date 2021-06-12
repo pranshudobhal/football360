@@ -21,6 +21,13 @@
   letter-spacing: 0.5px;
 }
 
+.noPlaylist {
+  display: grid;
+  place-items: center;
+  min-height: 50vh;
+  color: var(--gray-light);
+}
+
 @media screen and (min-width: 1025px) {
   .playlistListingContainer {
     width: 60vw;

@@ -12,10 +12,12 @@ html {
 :root {
   --primary-color: #111111;
   /* --secondary-color: #ff3f6c; */
-  --secondary-color: #86C232;
-  --secondary-color-background: #fafff2;  
+  --secondary-color: #86c232;
+  --secondary-color-dark: #75ac28;
+  --secondary-color-background: #fafff2;
   --white: #fff;
   --gray: #6b7280;
+  --gray-light: #b2b9c5;
   --button-color: rgb(17, 17, 17, 0.6);
   --border-color: #d7d7d7;
   --card-border: rgb(229, 229, 229);

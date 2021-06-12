@@ -37,6 +37,13 @@
   margin: 2rem 0;
 }
 
+.noVideosInPlaylist {
+  display: grid;
+  place-items: center;
+  min-height: 50vh;
+  color: var(--gray-light);
+}
+
 @media screen and (min-width: 1025px) {
   .playlistPageContainer {
     width: 40vw;
