@@ -7,7 +7,7 @@ import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import styles from './PlaylistPage.module.css';
 import { PlaylistPageVideoCard } from './components/PlaylistPageVideoCard';
 import axios from 'axios';
-import { Loader } from '../../components';
+import { Header, Navbar, Loader } from '../../components';
 
 export function PlaylistPage() {
   const { playlistID } = useParams();
@@ -64,30 +64,40 @@ export function PlaylistPage() {
     }
 
     return (
-      <div className={styles.playlistPageContainer}>
-        <div className={styles.playlistName}>
-          <input type="text" defaultValue={name} readOnly={!isEditable} ref={playlistInput} onChange={(e) => setPlaylistName(() => e.target.value)} />
-          <div className={styles.actions}>
-            <span onClick={() => editPlaylistName()}>{!isEditable ? <EditOutlinedIcon style={{ fontSize: 25 }} /> : <DoneIcon style={{ fontSize: 25 }} />}</span>
-            <span onClick={() => deletePlaylist(_id)}>
-              <DeleteOutlineIcon style={{ fontSize: 25 }} />
-            </span>
+      <>
+        <Header />
+        <Navbar />
+        <div className={styles.playlistPageContainer}>
+          <div className={styles.playlistName}>
+            <input type="text" defaultValue={name} readOnly={!isEditable} ref={playlistInput} onChange={(e) => setPlaylistName(() => e.target.value)} />
+            <div className={styles.actions}>
+              <span onClick={() => editPlaylistName()}>{!isEditable ? <EditOutlinedIcon style={{ fontSize: 25 }} /> : <DoneIcon style={{ fontSize: 25 }} />}</span>
+              <span onClick={() => deletePlaylist(_id)}>
+                <DeleteOutlineIcon style={{ fontSize: 25 }} />
+              </span>
+            </div>
+          </div>
+
+          <div className={styles.container}>
+            {videos?.map((video) => (
+              <PlaylistPageVideoCard key={video._id} video={video} playlistID={_id} />
+            ))}
+            {videos?.length === 0 && (
+              <div className={styles.noVideosInPlaylist}>
+                <h3>No vidoes in this playlist</h3>
+              </div>
+            )}
           </div>
         </div>
-
-        <div className={styles.container}>
-          {videos?.map((video) => (
-            <PlaylistPageVideoCard key={video._id} video={video} playlistID={_id} />
-          ))}
-          {videos?.length === 0 && (
-            <div className={styles.noVideosInPlaylist}>
-              <h3>No vidoes in this playlist</h3>
-            </div>
-          )}
-        </div>
-      </div>
+      </>
     );
   } else {
-    return <Loader />;
+    return (
+      <>
+        <Header />
+        <Navbar />
+        <Loader />
+      </>
+    );
   }
 }
