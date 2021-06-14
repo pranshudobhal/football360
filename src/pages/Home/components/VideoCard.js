@@ -2,7 +2,7 @@
  * Video Card for Homepage videos
  */
 
-import { useData } from '../../../context';
+import { useAuth, useData } from '../../../context';
 import { Link } from 'react-router-dom';
 import styles from './VideoCard.module.css';
 import axios from 'axios';
@@ -10,6 +10,8 @@ import axios from 'axios';
 export function VideoCard({ video }) {
   const { _id: id, name, channel, videoThumbnail, views } = video;
   const { videoDispatch } = useData();
+
+  const { token } = useAuth();
 
   const addToWatchHistory = async (videoID) => {
     try {
@@ -26,14 +28,14 @@ export function VideoCard({ video }) {
   return (
     <div key={id} className={styles.container}>
       <Link to={`/${id}`} className={styles.link}>
-        <div onClick={() => addToWatchHistory(id)}>
+        <div onClick={() => token && addToWatchHistory(id)}>
           <img src={videoThumbnail} className={styles.image} alt={name} />
         </div>
       </Link>
 
       <div className={styles.description}>
         <Link to={`/${id}`} className={styles.link}>
-          <h3 className={styles.title} onClick={() => addToWatchHistory(id)}>
+          <h3 className={styles.title} onClick={() => token && addToWatchHistory(id)}>
             {name}
           </h3>
         </Link>

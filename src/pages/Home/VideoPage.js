@@ -82,7 +82,6 @@ export function VideoPage() {
     if (playlistName !== '') {
       const response = await axios.post('http://localhost:3000/playlist/', { videoID: videoID, playlistName: playlistName });
 
-      console.log(response);
       if (response.status === 200) {
         videoDispatch({ type: 'CREATE_PLAYLIST', payload: { _id: response.data.newPlaylist._id, playlistName, video } });
         setplaylistName('');

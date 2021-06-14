@@ -1,9 +1,14 @@
 import styles from './HeaderDesktop.module.css';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { NavLink } from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/';
 
 export function HeaderDesktop() {
+  const { token, logoutUser } = useAuth();
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
       <NavLink to="/" className={styles.navlink}>
@@ -19,9 +24,7 @@ export function HeaderDesktop() {
           <SearchOutlinedIcon style={{ fontSize: 25, color: 'white' }} />
         </span>
       </div>
-      <div className={styles.user}>
-        <AccountCircleIcon style={{ fontSize: 27 }} />
-      </div>
+      <div className={styles.user}>{token ? <ExitToAppIcon onClick={logoutUser} /> : <AccountCircleIcon onClick={() => navigate('/login')} style={{ fontSize: 27 }} />}</div>
     </div>
   );
 }

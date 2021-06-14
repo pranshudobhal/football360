@@ -16,6 +16,10 @@
   cursor: pointer;
 }
 
+.logo span {
+  color: var(--secondary-color);
+}
+
 .actions {
   cursor: pointer;
   display: flex;
