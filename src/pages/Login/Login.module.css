@@ -18,3 +18,7 @@
   text-align: center;
   margin-bottom: 1rem;
 }
+
+.loginContainer p span {
+  color: blue;
+}

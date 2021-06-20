@@ -12,6 +12,11 @@ export const initialState = {
   playlists: null,
 };
 
+/**
+ * FIXME:
+ * Add a RESET STATE dispatch
+ */
+
 export const mainReducer = ({ videos, watchLater, likedVideos, history, playlists }, action) => ({
   videos: videosReducer(videos, action),
   watchLater: watchLaterReducer(watchLater, action),

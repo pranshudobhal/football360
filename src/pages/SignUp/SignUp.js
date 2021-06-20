@@ -10,6 +10,7 @@ export function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { token, signUpUser } = useAuth();
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
@@ -17,6 +18,12 @@ export function SignUp() {
   const signUpHandler = async () => {
     if (firstName && email && password !== '') {
       const signUpResponse = await signUpUser(firstName, lastName, email, password, state);
+
+      if (signUpResponse === 409) {
+        setError('User already exists!');
+      }
+    } else {
+      setError('Please fill all required fields!');
     }
   };
 
@@ -30,6 +37,7 @@ export function SignUp() {
       <div className={styles.container}>
         <div className={styles.loginContainer}>
           <h1>Login</h1>
+          <p>{error !== '' && error}</p>
           <form onSubmit={(e) => e.preventDefault()}>
             <label htmlFor="firstname">First Name: </label>
             <input type="text" id="firstname" name="firstname" value={firstName} onChange={(e) => setFirstName(() => e.target.value)} required /> <br />
@@ -43,7 +51,7 @@ export function SignUp() {
             <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(() => e.target.value)} required />
             <br />
             <br />
-            <button onClick={signUpHandler}>SingUp</button>
+            <button onClick={signUpHandler}>SignUp</button>
           </form>
         </div>
       </div>

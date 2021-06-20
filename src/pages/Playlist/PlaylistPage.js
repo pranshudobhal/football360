@@ -34,7 +34,7 @@ export function PlaylistPage() {
   const updatePlaylistName = async (playlistID) => {
     try {
       const response = await axios.post(`http://localhost:3000/playlist/${playlistID}`, { playlistName: playlistName });
-      console.log('line 36 response ', response);
+
       if (response.status === 200) {
         videoDispatch({ type: 'UPDATE_PLAYLIST_NAME', payload: { playlistID, name: playlistName } });
       }

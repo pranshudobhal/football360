@@ -7,14 +7,21 @@ import styles from './Login.module.css';
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { token, loginUserWithCredentials } = useAuth();
+  const { token, loginUser } = useAuth();
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state;
 
   const loginHandler = async () => {
     if (email && password !== '') {
-      const loginResponse = await loginUserWithCredentials(email, password, state);
+      const loginResponse = await loginUser(email, password, state);
+
+      if (loginResponse === 401) {
+        setError('Invalid username or password');
+      }
+    } else {
+      setError('');
     }
   };
 
@@ -28,6 +35,7 @@ export function Login() {
       <div className={styles.container}>
         <div className={styles.loginContainer}>
           <h1>Login</h1>
+          <p>{error !== '' && error}</p>
           <form onSubmit={(e) => e.preventDefault()}>
             <label htmlFor="email">Email: </label>
             <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(() => e.target.value)} />
