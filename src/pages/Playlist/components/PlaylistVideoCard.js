@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import styles from './PlaylistVideoCard.module.css';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useState } from 'react';
-import axios from 'axios';
+import { toggleWatchLater, addToWatchHistory, removeVideoFromPlaylist } from '../../../services';
 
 export function PlaylistVideoCard({ video, playlistID }) {
   const { videoDispatch, watchLater } = useData();
@@ -17,47 +17,6 @@ export function PlaylistVideoCard({ video, playlistID }) {
   const navigate = useNavigate();
   const toggleModal = () => showMoreModal((moreModal) => !moreModal);
 
-  const removeVideoFromPlaylist = async (playlistID, videoID) => {
-    try {
-      const response = await axios.delete(`http://localhost:3000/playlist/${playlistID}/${videoID}`);
-
-      if (response.status === 200) {
-        videoDispatch({ type: 'TOGGLE_VIDEO_IN_PLAYLIST', payload: { video, playlistID } });
-      }
-    } catch (error) {
-      console.error('Error removing video from playlist', error);
-    }
-  };
-
-  const toggleWatchLater = async (videoID) => {
-    try {
-      let response;
-      if (isInWatchLater) {
-        response = await axios.delete(`http://localhost:3000/watchlater/${videoID}`);
-      } else {
-        response = await axios.post(`http://localhost:3000/watchlater/${videoID}`);
-      }
-
-      if (response.status === 200) {
-        videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: video });
-      }
-    } catch (error) {
-      console.error('Error toggling in watch later ', error);
-    }
-  };
-
-  const addToWatchHistory = async (videoID) => {
-    try {
-      const response = await axios.post(`http://localhost:3000/history/${videoID}`);
-
-      if (response.status === 200) {
-        videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video });
-      }
-    } catch (error) {
-      console.error('Error adding to watch history ', error);
-    }
-  };
-
   return (
     <div>
       <div key={id} className={styles.playlistVideoCardContainer}>
@@ -65,7 +24,7 @@ export function PlaylistVideoCard({ video, playlistID }) {
           className={styles.imageContainer}
           onClick={() => {
             navigate(`/${id}`);
-            addToWatchHistory(id);
+            addToWatchHistory(id, videoDispatch, video);
           }}
         >
           <img src={videoThumbnail} alt={name} className={styles.image} />
@@ -75,7 +34,7 @@ export function PlaylistVideoCard({ video, playlistID }) {
             <h3
               onClick={() => {
                 navigate(`/${id}`);
-                addToWatchHistory(id);
+                addToWatchHistory(id, videoDispatch, video);
               }}
             >
               {name}
@@ -98,7 +57,7 @@ export function PlaylistVideoCard({ video, playlistID }) {
                     <li
                       onClick={() => {
                         toggleModal();
-                        toggleWatchLater(id);
+                        toggleWatchLater(id, isInWatchLater, videoDispatch, video);
                       }}
                     >
                       {isInWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
@@ -106,7 +65,7 @@ export function PlaylistVideoCard({ video, playlistID }) {
                     <li
                       onClick={() => {
                         toggleModal();
-                        removeVideoFromPlaylist(playlistID, id);
+                        removeVideoFromPlaylist(playlistID, id, videoDispatch, video);
                       }}
                     >
                       Remove video from playlist

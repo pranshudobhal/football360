@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import styles from './LikedVideosCard.module.css';
 import { useState } from 'react';
-import axios from 'axios';
+import { toggleLikedVideos, addToWatchHistory, toggleWatchLater } from '../../../services';
 
 export function LikedVideosCard({ video }) {
   const { _id: id, name, channel, videoThumbnail, views } = video;
@@ -14,52 +14,6 @@ export function LikedVideosCard({ video }) {
   const isInWatchLater = watchLater?.find((video) => video._id === id);
   const toggleModal = () => showMoreModal((moreModal) => !moreModal);
 
-  const toggleLikedVideos = async (videoID) => {
-    try {
-      let response;
-      if (isInLikedVideos) {
-        response = await axios.delete(`http://localhost:3000/likedvideo/${videoID}`);
-      } else {
-        response = await axios.post(`http://localhost:3000/likedvideo/${videoID}`);
-      }
-
-      if (response.status === 200) {
-        videoDispatch({ type: 'TOGGLE_LIKED_VIDEO', payload: video });
-      }
-    } catch (error) {
-      console.error('Error toggling in Liked Videos ', error);
-    }
-  };
-
-  const toggleWatchLater = async (videoID) => {
-    try {
-      let response;
-      if (isInWatchLater) {
-        response = await axios.delete(`http://localhost:3000/watchlater/${videoID}`);
-      } else {
-        response = await axios.post(`http://localhost:3000/watchlater/${videoID}`);
-      }
-
-      if (response.status === 200) {
-        videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: video });
-      }
-    } catch (error) {
-      console.error('Error toggling in watch later ', error);
-    }
-  };
-
-  const addToWatchHistory = async (videoID) => {
-    try {
-      const response = await axios.post(`http://localhost:3000/history/${videoID}`);
-
-      if (response.status === 200) {
-        videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video });
-      }
-    } catch (error) {
-      console.error('Error adding to watch history ', error);
-    }
-  };
-
   return (
     <div>
       <div key={id} className={styles.likedVideosCardContainer}>
@@ -67,7 +21,7 @@ export function LikedVideosCard({ video }) {
           className={styles.imageContainer}
           onClick={() => {
             navigate(`/${id}`);
-            addToWatchHistory(id);
+            addToWatchHistory(id, videoDispatch, video);
           }}
         >
           <img src={videoThumbnail} alt={name} className={styles.image} />
@@ -76,7 +30,7 @@ export function LikedVideosCard({ video }) {
           <h3
             onClick={() => {
               navigate(`/${id}`);
-              addToWatchHistory(id);
+              addToWatchHistory(id, videoDispatch, video);
             }}
           >
             {name}
@@ -100,7 +54,7 @@ export function LikedVideosCard({ video }) {
                   <li
                     onClick={() => {
                       toggleModal();
-                      toggleWatchLater(id);
+                      toggleWatchLater(id, isInWatchLater, videoDispatch, video);
                     }}
                   >
                     {isInWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}
@@ -108,7 +62,7 @@ export function LikedVideosCard({ video }) {
                   <li
                     onClick={() => {
                       toggleModal();
-                      toggleLikedVideos(id);
+                      toggleLikedVideos(id, isInLikedVideos, videoDispatch, video);
                     }}
                   >
                     {isInLikedVideos ? 'Remove from Liked Videos' : 'Add to Liked Videos'}

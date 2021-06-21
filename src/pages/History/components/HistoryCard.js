@@ -3,7 +3,7 @@ import styles from './HistoryCard.module.css';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { addToWatchHistory, toggleWatchLater } from '../../../services';
 
 export function HistoryCard({ video }) {
   const { _id: id, name, channel, videoThumbnail, views } = video;
@@ -13,35 +13,6 @@ export function HistoryCard({ video }) {
   const navigate = useNavigate();
   const toggleModal = () => showMoreModal((moreModal) => !moreModal);
 
-  const toggleWatchLater = async (videoID) => {
-    try {
-      let response;
-      if (isInWatchLater) {
-        response = await axios.delete(`http://localhost:3000/watchlater/${videoID}`);
-      } else {
-        response = await axios.post(`http://localhost:3000/watchlater/${videoID}`);
-      }
-
-      if (response.status === 200) {
-        videoDispatch({ type: 'TOGGLE_WATCH_LATER', payload: video });
-      }
-    } catch (error) {
-      console.error('Error toggling in watch later ', error);
-    }
-  };
-
-  const addToWatchHistory = async (videoID) => {
-    try {
-      const response = await axios.post(`http://localhost:3000/history/${videoID}`);
-
-      if (response.status === 200) {
-        videoDispatch({ type: 'ADD_VIDEO_TO_WATCH_HISTORY', payload: video });
-      }
-    } catch (error) {
-      console.error('Error adding to watch history ', error);
-    }
-  };
-
   return (
     <div>
       <div key={id} className={styles.historyCardContainer}>
@@ -49,7 +20,7 @@ export function HistoryCard({ video }) {
           className={styles.imageContainer}
           onClick={() => {
             navigate(`/${id}`);
-            addToWatchHistory(id);
+            addToWatchHistory(id, videoDispatch, video);
           }}
         >
           <img src={videoThumbnail} alt={name} className={styles.image} />
@@ -58,7 +29,7 @@ export function HistoryCard({ video }) {
           <h3
             onClick={() => {
               navigate(`/${id}`);
-              addToWatchHistory(id);
+              addToWatchHistory(id, videoDispatch, video);
             }}
           >
             {name}
@@ -82,7 +53,7 @@ export function HistoryCard({ video }) {
                   <li
                     onClick={() => {
                       toggleModal();
-                      toggleWatchLater(id);
+                      toggleWatchLater(id, isInWatchLater, videoDispatch, video);
                     }}
                   >
                     {isInWatchLater ? 'Remove from Watch Later' : 'Add to Watch Later'}

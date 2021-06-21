@@ -6,8 +6,8 @@ import DoneIcon from '@material-ui/icons/Done';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import styles from './PlaylistPage.module.css';
 import { PlaylistPageVideoCard } from './components/PlaylistPageVideoCard';
-import axios from 'axios';
 import { Header, Navbar, Loader } from '../../components';
+import { deletePlaylist, updatePlaylistName } from '../../services';
 
 export function PlaylistPage() {
   const { playlistID } = useParams();
@@ -17,31 +17,6 @@ export function PlaylistPage() {
   const [playlistName, setPlaylistName] = useState(playlist?.name);
   const playlistInput = useRef(null);
   const navigate = useNavigate();
-
-  const deletePlaylist = async (playlistID) => {
-    try {
-      const response = await axios.delete(`http://localhost:3000/playlist/${playlistID}`);
-
-      if (response.status === 200) {
-        navigate('/playlist');
-        videoDispatch({ type: 'DELETE_PLAYLIST', payload: playlistID });
-      }
-    } catch (error) {
-      console.error('Error deleting playlist', error);
-    }
-  };
-
-  const updatePlaylistName = async (playlistID) => {
-    try {
-      const response = await axios.post(`http://localhost:3000/playlist/${playlistID}`, { playlistName: playlistName });
-
-      if (response.status === 200) {
-        videoDispatch({ type: 'UPDATE_PLAYLIST_NAME', payload: { playlistID, name: playlistName } });
-      }
-    } catch (error) {
-      console.error('Error updating playlist name', error);
-    }
-  };
 
   useEffect(() => {
     const isPlaylistPresent = playlists?.some((playlist) => playlist._id === playlistID);
@@ -58,7 +33,7 @@ export function PlaylistPage() {
       if (!isEditable) {
         playlistInput.current.focus();
       } else {
-        updatePlaylistName(_id);
+        updatePlaylistName(_id, videoDispatch, playlistName);
       }
       setIsEditable((isEditable) => !isEditable);
     }
@@ -72,7 +47,7 @@ export function PlaylistPage() {
             <input type="text" defaultValue={name} readOnly={!isEditable} ref={playlistInput} onChange={(e) => setPlaylistName(() => e.target.value)} />
             <div className={styles.actions}>
               <span onClick={() => editPlaylistName()}>{!isEditable ? <EditOutlinedIcon style={{ fontSize: 25 }} /> : <DoneIcon style={{ fontSize: 25 }} />}</span>
-              <span onClick={() => deletePlaylist(_id)}>
+              <span onClick={() => deletePlaylist(_id, navigate, videoDispatch)}>
                 <DeleteOutlineIcon style={{ fontSize: 25 }} />
               </span>
             </div>

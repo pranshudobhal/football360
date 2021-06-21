@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { createContext, useContext } from 'react';
 import { useNavigate } from 'react-router';
+import { API_URL } from '../../utils';
+import { loginService, signUpService } from '../../services';
 
 const AuthContext = createContext();
 
@@ -11,22 +13,6 @@ const setupAuthHeaderForServiceCalls = (token) => {
     return (axios.defaults.headers.common['Authorization'] = token);
   }
   delete axios.defaults.headers.common['Authorization'];
-};
-
-const loginService = (email, password) => {
-  return axios.post('http://localhost:3000/login', {
-    email: email,
-    password: password,
-  });
-};
-
-const signUpService = (firstName, lastName, email, password) => {
-  return axios.post('http://localhost:3000/signup', {
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    password: password,
-  });
 };
 
 export const AuthProvider = ({ children }) => {
@@ -48,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   const getUserData = async () => {
     try {
-      const userResponse = await axios.get('http://localhost:3000/user');
+      const userResponse = await axios.get(`${API_URL}/user`);
       setUser(userResponse.data.user);
     } catch (error) {
       console.error('Error getting user data ', error);

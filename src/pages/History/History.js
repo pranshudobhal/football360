@@ -1,23 +1,11 @@
-import axios from 'axios';
 import { useData } from '../../context';
 import { HistoryCard } from './components/HistoryCard';
 import styles from './History.module.css';
 import { Header, Navbar, Loader } from '../../components';
+import { clearAllHistory } from '../../services';
 
 export function History() {
   const { history, videoDispatch } = useData();
-
-  const clearAllHistory = async () => {
-    try {
-      const response = await axios.delete('http://localhost:3000/history/');
-
-      if (response.status === 200) {
-        videoDispatch({ type: 'CLEAR_WATCH_HISTORY' });
-      }
-    } catch (error) {
-      console.error('Error clearing all history ', error);
-    }
-  };
 
   return (
     <>
@@ -26,7 +14,7 @@ export function History() {
       <div className={styles.historyContainer}>
         <div className={styles.heading}>
           <h1>History</h1>
-          <button onClick={() => history !== null && clearAllHistory()}>Clear all history</button>
+          <button onClick={() => history !== null && clearAllHistory(videoDispatch)}>Clear all history</button>
         </div>
         {history === null ? (
           <Loader />

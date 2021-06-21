@@ -33,6 +33,9 @@ export const playlistsReducer = (state, action) => {
     case 'UPDATE_PLAYLIST_NAME':
       return [...state?.map((playlistItem) => (playlistItem._id === action.payload.playlistID ? { ...playlistItem, name: action.payload.name } : playlistItem))];
 
+    case 'RESET_PLAYLIST':
+      return null;
+
     default:
       return state;
   }
