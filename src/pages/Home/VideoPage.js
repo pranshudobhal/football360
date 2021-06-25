@@ -20,7 +20,7 @@ export function VideoPage() {
   const isInWatchLater = watchLater?.find((video) => video._id === videoID);
   const { token } = useAuth();
   const navigate = useNavigate();
-  console.log({ videos });
+
   const isInPlaylist = (playlistID) => {
     const playlist = playlists?.find((playlistItem) => playlistItem._id === playlistID);
     return playlist?.videos.find((video) => video._id === videoID) ? true : false;

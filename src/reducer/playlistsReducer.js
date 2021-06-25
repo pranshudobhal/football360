@@ -19,7 +19,7 @@ export const playlistsReducer = (state, action) => {
           if (playlistItem._id === action.payload.playlistID) {
             return {
               ...playlistItem,
-              videos: playlistItem.videos.find((video) => video._id === action.payload.video._id) ? playlistItem.videos.filter((video) => video._id !== action.payload.video._id) : [...playlistItem.videos, action.payload.video],
+              videos: playlistItem?.videos?.find((video) => video._id === action.payload.video._id) ? playlistItem?.videos?.filter((video) => video._id !== action.payload.video._id) : [...playlistItem.videos, action.payload.video],
             };
           } else {
             return { ...playlistItem };

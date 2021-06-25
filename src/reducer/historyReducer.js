@@ -4,7 +4,7 @@ export const historyReducer = (state, action) => {
       return [...action.payload];
 
     case 'ADD_VIDEO_TO_WATCH_HISTORY':
-      return [...(state?.find((video) => video._id === action.payload._id) ? [...state.filter((video) => video._id !== action.payload._id), { ...action.payload }] : [...state, { ...action.payload }])];
+      return [...(state?.find((video) => video._id === action.payload._id) ? [...state?.filter((video) => video._id !== action.payload._id), { ...action.payload }] : [...state, { ...action.payload }])];
 
     case 'CLEAR_WATCH_HISTORY':
       return [];
