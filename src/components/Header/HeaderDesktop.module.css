@@ -28,7 +28,6 @@
 }
 
 .search span {
-  /* border: 1px solid black; */
   background-color: var(--secondary-color);
   padding: 0.25rem 3rem;
   border-radius: 5px;
@@ -41,8 +40,15 @@
   margin-right: 0.25rem;
 }
 
-.user {
+.user button {
   cursor: pointer;
+  border: 0;
+  background-color: var(--secondary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: var(--white);
+  font-weight: 300;
+  font-size: 1rem;
 }
 
 .navlink {

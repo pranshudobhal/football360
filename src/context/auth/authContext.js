@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     token && getUserData();
-  }, []);
+  }, [token]);
 
   const loginUser = async (email, password, state) => {
     try {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { useAuth, useData } from '../../context';
 import { Error404 } from '../Error/Error404';
 import styles from './VideoPage.module.css';

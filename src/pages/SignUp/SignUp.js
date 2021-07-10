@@ -29,7 +29,7 @@ export function SignUp() {
 
   useEffect(() => {
     token && navigate('/');
-  }, []);
+  }, [token, navigate]);
 
   return (
     <>

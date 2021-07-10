@@ -24,6 +24,7 @@ export function PlaylistPage() {
     !isPlaylistPresent && playlists && navigate('/*');
 
     setPlaylistName(playlist?.name);
+    //eslint-disable-next-line
   }, [playlists]);
 
   if (playlist) {

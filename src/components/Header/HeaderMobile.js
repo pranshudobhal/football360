@@ -1,7 +1,5 @@
 import styles from './HeaderMobile.module.css';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context';
 
@@ -20,7 +18,7 @@ export function HeaderMobile() {
       </NavLink>
       <div className={styles.actions}>
         <SearchOutlinedIcon style={{ fontSize: 25 }} color="disabled" />
-        {token ? <ExitToAppIcon onClick={logoutUser} /> : <AccountCircleIcon onClick={() => navigate('/login')} style={{ fontSize: 27 }} />}
+        {token ? <button onClick={() => navigate('/login')}>Logout</button> : <button onClick={logoutUser}>Logout</button>}
       </div>
     </div>
   );
