@@ -18,7 +18,7 @@ export function HeaderMobile() {
       </NavLink>
       <div className={styles.actions}>
         <SearchOutlinedIcon style={{ fontSize: 25 }} color="disabled" />
-        {token ? <button onClick={() => navigate('/login')}>Logout</button> : <button onClick={logoutUser}>Logout</button>}
+        {token ? <button onClick={logoutUser}>Logout</button> : <button onClick={() => navigate('/login')}>Login</button>}
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ export function HeaderDesktop() {
           <SearchOutlinedIcon style={{ fontSize: 25, color: 'white' }} />
         </span>
       </div>
-      <div className={styles.user}>{token ? <button onClick={() => navigate('/login')}>Logout</button> : <button onClick={logoutUser}>Logout</button>}</div>
+      <div className={styles.user}>{token ? <button onClick={logoutUser}>Logout</button> : <button onClick={() => navigate('/login')}>Login</button>}</div>
     </div>
   );
 }

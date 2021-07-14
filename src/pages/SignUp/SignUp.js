@@ -36,7 +36,7 @@ export function SignUp() {
       <Header />
       <div className={styles.container}>
         <div className={styles.loginContainer}>
-          <h1>Login</h1>
+          <h1>Signup</h1>
           <p>{error !== '' && error}</p>
           <form onSubmit={(e) => e.preventDefault()}>
             <label htmlFor="firstname">First Name: </label>
@@ -51,7 +51,7 @@ export function SignUp() {
             <input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(() => e.target.value)} required />
             <br />
             <br />
-            <button onClick={signUpHandler}>SignUp</button>
+            <button onClick={signUpHandler}>Signup</button>
           </form>
         </div>
       </div>
