@@ -1,6 +1,6 @@
 # [Football360](https://football360.vercel.app/)
 
-A video library app for all football lovers. Don't let anything distract you from football😋
+A video library app for all football lovers. Don't let anything distract you from football 😀
 
 ## **Installation**
 
@@ -28,15 +28,15 @@ $ npm install
 - Videos can be added to Watch Later and Liked Videos
 - Watched Videos added to History
 - Playlist Management:
-    - Create new playlist
-    - Add or remove videos from playlist
-    - Delete entire playlist
-    - Update playlist name
-    - Playlist Listing
-    - Individual playlist page
+  - Create new playlist
+  - Add or remove videos from playlist
+  - Delete entire playlist
+  - Update playlist name
+  - Playlist Listing
+  - Individual playlist page
 - Authentication:
-    - User Signup
-    - User Login
+  - User Signup
+  - User Login
 
 ## **Author**
 
