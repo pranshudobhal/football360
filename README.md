@@ -1,6 +1,6 @@
 # Football360
 
-A video library app for all the football lovers. Don't let anything distract you from football.😋
+A video library app for all football lovers. Don't let anything distract you from football😋
 
 ## **Installation**
 
