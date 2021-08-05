@@ -47,7 +47,18 @@ export function Login() {
             <button onClick={loginHandler}>Login</button>
           </form>
           <p>
-            Don't have an account? <span onClick={() => navigate('/signup')}>Sign up</span>!!
+            <span
+              onClick={() => {
+                setEmail('test@gmail.com');
+                setPassword('test');
+              }}
+            >
+              Use guest credentials
+            </span>
+            !!
+          </p>
+          <p>
+            Don't have an account? <span onClick={() => navigate('/signup')}>Sign up</span>
           </p>
         </div>
       </div>

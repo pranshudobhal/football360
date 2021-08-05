@@ -53,6 +53,9 @@ export function SignUp() {
             <br />
             <button onClick={signUpHandler}>Signup</button>
           </form>
+          <p>
+            Already a user? <span onClick={() => navigate('/login')}>Login</span>
+          </p>
         </div>
       </div>
     </>
