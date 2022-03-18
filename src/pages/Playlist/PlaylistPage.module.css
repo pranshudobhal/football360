@@ -1,0 +1,52 @@
+.playlistPageContainer {
+  width: 95vw;
+  margin: 1rem auto;
+}
+
+.playlistName {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.25rem;
+}
+
+.playlistName input {
+  color: var(--primary-color);
+  width: 100%;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 0.5rem 0;
+  border: 0;
+  background-color: transparent;
+}
+
+.actions {
+  display: flex;
+}
+
+.actions span {
+  display: inline-block;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1rem;
+  margin: 2rem 0;
+}
+
+.noVideosInPlaylist {
+  display: grid;
+  place-items: center;
+  min-height: 50vh;
+  color: var(--gray-light);
+}
+
+@media screen and (min-width: 1025px) {
+  .playlistPageContainer {
+    width: 40vw;
+    margin: 2rem auto;
+  }
+}

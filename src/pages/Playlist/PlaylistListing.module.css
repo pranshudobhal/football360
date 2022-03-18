@@ -1,0 +1,37 @@
+.playlistListingContainer {
+  width: 95vw;
+  margin: 0 auto;
+  padding-bottom: 5rem;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 1.25rem 1rem;
+}
+
+.heading h1 {
+  font-size: 1.5rem;
+}
+
+.heading button {
+  border: none;
+  background-color: var(--white);
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.noPlaylist {
+  display: grid;
+  place-items: center;
+  min-height: 50vh;
+  color: var(--gray-light);
+}
+
+@media screen and (min-width: 1025px) {
+  .playlistListingContainer {
+    width: 60vw;
+    margin: 2rem auto;
+    padding-bottom: 2rem;
+  }
+}
