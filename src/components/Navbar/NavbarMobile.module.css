@@ -1,0 +1,43 @@
+.container {
+  position: fixed;
+  bottom: 0;
+  height: 9vh;
+  background-color: white;
+  width: 100vw;
+  overflow: hidden;
+  z-index: 998;
+  border-top: 1px solid var(--border-color);
+  box-shadow: rgb(0 0 0 / 24%) 0px 1px 8px;
+}
+
+.list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+  padding: 0.5rem 0;
+}
+
+.list li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+  font-size: 0.9rem;
+}
+
+.navlink {
+  text-decoration: none;
+  color: black;
+}
+
+.active {
+  color: var(--secondary-color);
+}
+
+@media screen and (min-width: 1025px) {
+  .container {
+    display: none;
+  }
+}

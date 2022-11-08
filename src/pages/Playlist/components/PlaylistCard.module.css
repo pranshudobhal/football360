@@ -1,0 +1,36 @@
+.playlistCardContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.playlistName {
+  display: flex;
+  justify-content: space-between;
+}
+
+.playlistName span {
+  cursor: pointer;
+}
+
+.container {
+  height: 100%;
+  margin: 1rem 0 0;
+}
+
+.videoContainer {
+  display: flex;
+  overflow-x: scroll;
+  height: 100%;
+  width: 100%;
+}
+
+.emptyContainer {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  font-size: 1.15rem;
+  color: var(--gray);
+  font-weight: 500;
+}
